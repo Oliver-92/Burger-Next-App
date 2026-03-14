@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
+import { Icon } from "@/components/atoms/Icon";
 import type { Product } from "@/lib/types";
 
 interface MenuCardProps {
@@ -47,7 +48,8 @@ export function MenuCard({ item }: MenuCardProps) {
 
                 {/* Actions */}
                 <div className="mt-auto pt-4 flex gap-3">
-                    <Button variant="primary" className="flex-1 h-12 text-sm shadow-none hover:shadow-lg hover:shadow-primary/20">
+                    <Button variant="light" className="flex-1">
+                        <Icon name="add_shopping_cart" size="sm" />
                         Agregar al carrito
                     </Button>
                 </div>

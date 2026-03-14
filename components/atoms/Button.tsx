@@ -5,6 +5,7 @@ const BUTTON_VARIANT = {
     SECONDARY: "secondary",
     GHOST: "ghost",
     ICON: "icon",
+    LIGHT: "light",
 } as const;
 
 type ButtonVariant = (typeof BUTTON_VARIANT)[keyof typeof BUTTON_VARIANT];
@@ -33,6 +34,8 @@ export function Button({
                 "h-10 px-4 rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:opacity-80 text-sm",
                 variant === "icon" &&
                 "size-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:opacity-80",
+                variant === "light" &&
+                "h-12 px-8 rounded-full bg-white text-background-dark hover:bg-primary active:scale-95 transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-lg hover:shadow-primary/20",
                 className
             )}
             {...props}
