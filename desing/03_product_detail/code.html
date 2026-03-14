@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Producto - Burger Joint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#36e27b",
+              "primary-hover": "#2bc466",
+              "background-light": "#f6f8f7",
+              "background-dark": "#111714",
+              "surface-dark": "#1a231f",
+              "surface-highlight": "#29382f",
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "Noto Sans", "sans-serif"],
+              "body": ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "1rem",
+              "lg": "2rem",
+              "xl": "3rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+          background: #1a231f; 
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #29382f; 
+          border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #36e27b; 
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased selection:bg-primary selection:text-black">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] bg-[#111714]/80 backdrop-blur-md px-10 py-3">
+<div class="flex items-center gap-4 text-white cursor-pointer">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">BURGER JOINT</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Menú</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Nosotros</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Locales</a>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center overflow-hidden rounded-full size-10 bg-[#29382f] text-white hover:bg-primary hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-full size-10 bg-[#29382f] text-white hover:bg-primary hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</button>
+</div>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[1280px] flex-1">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 p-4 mb-4">
+<a class="text-[#9eb7a8] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="text-[#9eb7a8] text-sm font-medium leading-normal">/</span>
+<a class="text-[#9eb7a8] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Menú</a>
+<span class="text-[#9eb7a8] text-sm font-medium leading-normal">/</span>
+<span class="text-white text-sm font-medium leading-normal">La Bestia Urbana</span>
+</nav>
+<!-- Main Content Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 pb-20">
+<!-- Left Column: Visuals (Sticky on Desktop) -->
+<div class="lg:col-span-7 flex flex-col gap-6 relative">
+<div class="sticky top-24">
+<div class="w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden bg-surface-dark border border-[#29382f] shadow-2xl relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+<!-- Hero Image -->
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="A massive, juicy double smash burger with melted cheddar cheese dripping down the sides, caramelized onions, and crispy bacon on a toasted brioche bun." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBciqtc3As8y4vsADPGMoe5rD-twIKDJe5E9bpHizcza5lDLBu_TwSMQ9VvdAkZmnKYZPCmxijUVk_nSXoT2ah9EzVgLkcALCXAyhqJRxPpPiPO4GSkOxSEA6CB-iXQgf95hE1xMmFMJjuJEv85PLr67xn32GdFG_wcLShnVSfNi70CNjz_lN2CfPXqkxF7kcT1RQXpEfnKkplnVznyeGHcn6l3c0GTeD3oz84GNckEbsbq7iCscyCbQEyc_en8GsM-o2_9LPBn5QP1");'>
+</div>
+<!-- Floating Badge -->
+<div class="absolute top-6 right-6 z-20 bg-primary text-black font-bold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-primary/20">
+                    Best Seller
+                  </div>
+</div>
+<!-- Thumbnails / Gallery (Optional) -->
+<div class="flex gap-4 mt-4 overflow-x-auto pb-2 custom-scrollbar">
+<div class="size-20 min-w-20 rounded-xl bg-surface-dark border border-primary/40 cursor-pointer overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Main burger view close up" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBO8bJ1dPHJA3rzCHtY1I013dXCASGD47xcgQS-g-6svIy9XEe7hMQOP2ahiXIWBhCz30Kxg8fcOh5UXk1y1IXqrC3NLSsnGKpjwMwVgnCn-AS02ItbpvGM4G0Y5jEH0VA2FUuPznmgCUr2VZDspzwXEZUAbzl8vyY8b1uMdzlvxRHxYWO_iubP4jo-7SnV7Iv0agAb6zJDUdlULYQu9c7Ai6tosGwgBzp_rh-6NuppZWnP-6oV9n-2zP9aiah3e_ZP_NcgNXhjn_Cl");'></div>
+</div>
+<div class="size-20 min-w-20 rounded-xl bg-surface-dark border border-[#29382f] hover:border-white/50 cursor-pointer overflow-hidden relative transition-colors">
+<div class="w-full h-full bg-cover bg-center opacity-70 hover:opacity-100 transition-opacity" data-alt="Burger ingredients spread out" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUpoohnkFSG-_HI4L0O98xB5V1c8SsCd4HdAdW6YtRglEX5HKtpiO08wP2f5UQrCsVV4UtQGdVEH-C64aa13OdEoRLn7bwQLSq43Tp_jEbaN6ZzhwAJ7QjuRSKOfaet3mQAJXPo4RpYkPqjv90q7cve2ouZki0VLlsJLxz6RGwnH41ZncNO-zMOIyb0Mpndym3XnyljXRGXddTzTxK6rzfk4n45Kg0iKlOn1x3PoDZhf1iL8tFmSCKQlWvZzjTonhJ0GOI4VzNidau");'></div>
+</div>
+<div class="size-20 min-w-20 rounded-xl bg-surface-dark border border-[#29382f] hover:border-white/50 cursor-pointer overflow-hidden relative transition-colors">
+<div class="w-full h-full bg-cover bg-center opacity-70 hover:opacity-100 transition-opacity" data-alt="Burger served with fries" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFYwkW-MN1FLlPpa0Vu8lei3Cm-MXnho5lZy4bkEh868-R577Q8Y8IKWwWw0uxa30K0qtEgM3P9r75jF384J5J4HZb1DjMZeTtw3IjhMJCuQqQPcWk_K6uFgVCm1KdDbqUxgT9luEtcNgZrJlmvMM-Qj-gcyOmIjatOABQdjCHnNMSubMa8pzCeXQpk71ZgxE8r7Aw48gz1G-C20YyXwg2dQgMUoaq9NwwVkGi5PNBOEnbD9L5jkLcKCJELSAYBDgUR0YBmPSjr02L");'></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Details & Customization -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<!-- Header -->
+<div class="border-b border-[#29382f] pb-6">
+<div class="flex items-start justify-between gap-4 mb-2">
+<h1 class="text-white text-4xl md:text-5xl font-black leading-none tracking-tight uppercase font-display">
+                    La Bestia<br/><span class="text-primary">Urbana</span>
+</h1>
+<div class="flex flex-col items-end">
+<span class="text-white text-3xl font-bold tracking-tight">$12.50</span>
+<div class="flex items-center gap-1 text-[#9eb7a8] text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">timer</span> 15 min
+                    </div>
+</div>
+</div>
+<p class="text-[#9eb7a8] text-lg font-normal leading-relaxed mt-4">
+                  Doble carne smash de 120g, queso cheddar fundido, cebolla caramelizada, bacon crujiente y nuestra salsa secreta en pan brioche artesanal. Una explosión de sabor urbano en cada bocado.
+                </p>
+<div class="flex gap-2 mt-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#29382f] text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-orange-400">local_fire_department</span> Picante Suave
+                  </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#29382f] text-white text-xs font-medium">
+                     100% Angus
+                  </span>
+</div>
+</div>
+<!-- Customization: Remove Ingredients -->
+<div class="flex flex-col gap-4">
+<h3 class="text-white text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">remove_circle_outline</span>
+                  ¿Quitar algo?
+                </h3>
+<div class="flex flex-wrap gap-2">
+<label class="cursor-pointer group select-none">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-[#29382f] bg-transparent text-[#9eb7a8] text-sm font-medium transition-all peer-checked:bg-red-500/20 peer-checked:border-red-500 peer-checked:text-red-400 hover:border-white/30">
+                      Sin Cebolla
+                    </div>
+</label>
+<label class="cursor-pointer group select-none">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-[#29382f] bg-transparent text-[#9eb7a8] text-sm font-medium transition-all peer-checked:bg-red-500/20 peer-checked:border-red-500 peer-checked:text-red-400 hover:border-white/30">
+                      Sin Tomate
+                    </div>
+</label>
+<label class="cursor-pointer group select-none">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-[#29382f] bg-transparent text-[#9eb7a8] text-sm font-medium transition-all peer-checked:bg-red-500/20 peer-checked:border-red-500 peer-checked:text-red-400 hover:border-white/30">
+                      Sin Salsa
+                    </div>
+</label>
+<label class="cursor-pointer group select-none">
+<input class="peer sr-only" type="checkbox"/>
+<div class="px-4 py-2 rounded-full border border-[#29382f] bg-transparent text-[#9eb7a8] text-sm font-medium transition-all peer-checked:bg-red-500/20 peer-checked:border-red-500 peer-checked:text-red-400 hover:border-white/30">
+                      Sin Pepinillos
+                    </div>
+</label>
+</div>
+</div>
+<!-- Customization: Add Extras -->
+<div class="flex flex-col gap-4">
+<h3 class="text-white text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_circle_outline</span>
+                  Mejora tu burger
+                </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Extra Item 1 -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" type="checkbox"/>
+<div class="flex items-center p-3 rounded-xl bg-surface-highlight border border-transparent transition-all peer-checked:border-primary peer-checked:bg-surface-highlight/80 hover:bg-[#34463b]">
+<div class="size-12 rounded-full bg-white/10 flex-shrink-0 bg-cover bg-center" data-alt="Extra cheese slice" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAH2cpUcrJxej8pOWrZzcgnb74A5o91ZnHcETnoGAhKM0EISL6Q0p5pXvFqfFAp0-lMVRV1EEH8XeZ5KtKV-L9oSsdJSQuktTsXn-WY71AMDueR1TdAO5i1IynfwfQ0cukJoaeSSSdxWbVMbzNWa3wJg6ymNld5WigAQ5O_ZykGx9298pBO5FH35Ybd8bTMXWHsmgnW0VRlMBNHVLDNqcgeAQg9PuxzHMbvPQ09zwtoXasPwxcQhWkkaNrArUybtSouBFe6jYv4za-G");'></div>
+<div class="ml-3 flex-1">
+<div class="text-white text-sm font-bold">Extra Cheddar</div>
+<div class="text-[#9eb7a8] text-xs">+$1.50</div>
+</div>
+<div class="size-6 rounded-full border-2 border-[#586b60] flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+<span class="material-symbols-outlined text-black text-[16px] opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+<!-- Extra Item 2 -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" type="checkbox"/>
+<div class="flex items-center p-3 rounded-xl bg-surface-highlight border border-transparent transition-all peer-checked:border-primary peer-checked:bg-surface-highlight/80 hover:bg-[#34463b]">
+<div class="size-12 rounded-full bg-white/10 flex-shrink-0 bg-cover bg-center" data-alt="Crispy bacon strips" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfvQVYUi6TErx7g5IqumPx55aKw2zOj_IlKlXft6LednyztYO0-f_d1qb6Zqp6Dvgz_xN9KEpLJVZnZ0bzVWamhh8BWtTgO7SGprr3N30qBEHR5drEbquzY-jqjdPCAg_K6tLhzMUSD-KYAcaFnBBp61MYRfDlZ-tqilss5U_ejnJf7pnlOILpA_DIUm3lTvlgu5tAVXo0K6JtB5KpY_OELyCmbVKKc53VvpuxYfWND3-s_FM_JjR-9Lg1ExsOmSp0LARgSOybBknd");'></div>
+<div class="ml-3 flex-1">
+<div class="text-white text-sm font-bold">Extra Bacon</div>
+<div class="text-[#9eb7a8] text-xs">+$2.00</div>
+</div>
+<div class="size-6 rounded-full border-2 border-[#586b60] flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+<span class="material-symbols-outlined text-black text-[16px] opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+<!-- Extra Item 3 -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" type="checkbox"/>
+<div class="flex items-center p-3 rounded-xl bg-surface-highlight border border-transparent transition-all peer-checked:border-primary peer-checked:bg-surface-highlight/80 hover:bg-[#34463b]">
+<div class="size-12 rounded-full bg-white/10 flex-shrink-0 bg-cover bg-center" data-alt="Fried egg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvKR9RUT_TDXsi_hhIdBjWkaPgt-Ny4SsexDwlm-JMkw9bfFyUsDHAv3YYDwJdqmoOrHTFMWRe3Nrs3esuPr5a8BbFrn5TsQMdjKOyMKveLpNTLuoohE3GEEnbLF_zHC0TJY0dorEVTf78xc7bGZvbpXDo7F-mYqPvC9QOdm3bnoAim9oe09fK_L-XVqWlR7Ir_UKvlYiCLJDRhsz0w1u6J13i_nKLnU_xYqoqO852MibiJjMSZe_gEZFDP_gQ_YGd2rzaFp1jHLw5");'></div>
+<div class="ml-3 flex-1">
+<div class="text-white text-sm font-bold">Huevo Frito</div>
+<div class="text-[#9eb7a8] text-xs">+$1.00</div>
+</div>
+<div class="size-6 rounded-full border-2 border-[#586b60] flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+<span class="material-symbols-outlined text-black text-[16px] opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+<!-- Extra Item 4 -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" type="checkbox"/>
+<div class="flex items-center p-3 rounded-xl bg-surface-highlight border border-transparent transition-all peer-checked:border-primary peer-checked:bg-surface-highlight/80 hover:bg-[#34463b]">
+<div class="size-12 rounded-full bg-white/10 flex-shrink-0 bg-cover bg-center" data-alt="Fresh avocado slices" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCao1cm37FwBiibuFNPJkYB7Em2dBZ7zBOopA_X4YBWtvJj0hf3uMrFo6yAbv41XoyWFuIjoPWcgH6sVp0hBERMtdew1QIxiNw9y7PC0o7LCEy7qPmQV4YVSfLGO3er9VGmhhNKrTAdhk6IGnmc1pPviYAN1i2DJWBOyyV9fNKzpTyV6m0aeaL_aylEwk8N4Jzs4xktac3fp1Epmvs7AShyAt4CFmFKk4T7LFujXy-S5mvojhe_8wbmjMAsW7S2WvtCm4Vz7eopbV8d");'></div>
+<div class="ml-3 flex-1">
+<div class="text-white text-sm font-bold">Aguacate</div>
+<div class="text-[#9eb7a8] text-xs">+$1.75</div>
+</div>
+<div class="size-6 rounded-full border-2 border-[#586b60] flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+<span class="material-symbols-outlined text-black text-[16px] opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Notes -->
+<div class="flex flex-col gap-2">
+<h3 class="text-white text-sm font-bold">Notas de cocina</h3>
+<textarea class="w-full bg-surface-dark border border-[#29382f] rounded-xl p-3 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder-[#586b60] resize-none" placeholder="Ej: La carne bien cocida, salsa aparte..." rows="2"></textarea>
+</div>
+<!-- Sticky Action Footer (Mobile friendly positioning) -->
+<div class="sticky bottom-4 lg:relative lg:bottom-0 lg:mt-4 z-40">
+<div class="p-4 rounded-2xl bg-[#1a231f]/90 backdrop-blur-md border border-[#29382f] shadow-2xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-[#111714] rounded-full p-1 border border-[#29382f]">
+<button class="size-10 rounded-full flex items-center justify-center text-white hover:bg-[#29382f] transition-colors">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="w-8 text-center text-white font-bold text-lg">1</span>
+<button class="size-10 rounded-full flex items-center justify-center text-white hover:bg-[#29382f] transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="text-[#9eb7a8] text-xs">Total estimado</p>
+<p class="text-white text-2xl font-bold">$12.50</p>
+</div>
+</div>
+<button class="w-full h-14 bg-primary hover:bg-primary-hover text-black text-lg font-bold rounded-full flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(54,226,123,0.3)] hover:shadow-[0_0_30px_rgba(54,226,123,0.5)] transition-all transform active:scale-[0.98]">
+<span class="material-symbols-outlined font-bold">shopping_bag</span>
+                    Agregar al pedido
+                  </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

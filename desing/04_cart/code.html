@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Carrito de Compras - Burger Joint</title>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36e27b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-dark": "#1c2620", // Slightly lighter dark for cards
+                        "surface-border": "#29382f",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-surface-border bg-white/80 dark:bg-[#111714]/80 backdrop-blur-md px-6 lg:px-10 py-3">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined !text-3xl">lunch_dining</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Burger Joint</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Menú</a>
+<a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Nosotros</a>
+<a class="text-slate-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Sucursales</a>
+</nav>
+</div>
+<div class="flex items-center justify-end gap-3">
+<button class="flex size-10 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:bg-opacity-80 transition-colors">
+<span class="material-symbols-outlined !text-xl">search</span>
+</button>
+<button class="relative flex size-10 items-center justify-center rounded-full bg-primary text-[#111714] font-bold hover:bg-opacity-90 transition-colors shadow-[0_0_15px_rgba(54,226,123,0.3)]">
+<span class="material-symbols-outlined !text-xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold">3</span>
+</button>
+<button class="hidden sm:flex h-10 px-4 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-opacity-80 transition-colors">
+<span class="truncate">Login</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="layout-container flex h-full grow flex-col px-4 md:px-10 lg:px-40 py-8">
+<div class="mx-auto w-full max-w-6xl">
+<!-- Page Heading -->
+<div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Tu Pedido</h1>
+<p class="text-slate-500 dark:text-[#9eb7a8] text-base font-normal">Estás a un paso del mejor sabor urbano.</p>
+</div>
+<a class="group flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4" href="#">
+<span class="material-symbols-outlined !text-lg transition-transform group-hover:-translate-x-1">arrow_back</span>
+                    Seguir comprando
+                </a>
+</div>
+<div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+<!-- Cart Items Column -->
+<div class="flex flex-1 flex-col gap-6">
+<!-- Item 1 -->
+<div class="group relative flex flex-col sm:flex-row gap-4 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-surface-border p-4 transition-all hover:border-primary/50 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+<div class="relative shrink-0 overflow-hidden rounded-lg w-full sm:w-32 aspect-video sm:aspect-square">
+<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Juicy gourmet burger with melted cheese and bacon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUF5_JyR6QwlCeUR9mCyI1E_kgm0sAnCYR4C2-fi9Hhq2eyeohbTSOm6b1rxIMLztLjnFEwF2vtrjxZIYV2QksFYrqUMAdIkTLXkaZdOmcxYxpJKFwUQZeTRqtagyUGLfspMdD55tEpNzIV4z8js-AxkwsENdaoPX6jT25PCqdQllHsOKQ1ORxXqKXB7-hk56Gemx0hVw_3MpYgnqKoDMeXZYSUOdgxh3Ch2mOYvUPYWQzwsqNki73rxw_uHNNSEDlVO_HapaHzKlr");'></div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold leading-tight">Hamburguesa La Urbana</h3>
+<button aria-label="Eliminar" class="text-slate-400 hover:text-red-500 transition-colors p-1">
+<span class="material-symbols-outlined !text-xl">delete</span>
+</button>
+</div>
+<p class="text-slate-500 dark:text-[#9eb7a8] text-sm mt-1">Doble carne angus, queso cheddar, bacon ahumado, cebolla caramelizada, salsa secreta.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xl font-bold text-slate-900 dark:text-white">$12.00</p>
+<div class="flex items-center gap-3 bg-gray-100 dark:bg-[#111714] rounded-full px-2 py-1 border border-gray-200 dark:border-surface-border">
+<button class="flex size-7 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-surface-border transition-colors text-slate-600 dark:text-gray-300">
+<span class="material-symbols-outlined !text-lg">remove</span>
+</button>
+<span class="w-4 text-center text-sm font-bold">1</span>
+<button class="flex size-7 items-center justify-center rounded-full bg-white dark:bg-surface-border text-primary shadow-sm">
+<span class="material-symbols-outlined !text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative flex flex-col sm:flex-row gap-4 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-surface-border p-4 transition-all hover:border-primary/50 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+<div class="relative shrink-0 overflow-hidden rounded-lg w-full sm:w-32 aspect-video sm:aspect-square">
+<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Crispy rustic french fries with herbs" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvg5NDe1twPtW3XwkckVnPyLt865fffUlwhYJ5MkzJ6wRZBZvxw1974qPvlZSl8FYMZ-bRuO4L5jJDcB5aO1z0QgToze6qPYodOrFam9wcINIsQTx_ewOd_xKzF6GKBXBhOKmnLjt5k-Qpzy_X83Ifuhh2VpzkOhxzPcOf-gzAJCiX95-sDIR6Jv_bsSnelloDCIqY-hIzqbAZlS54f_XQlWBgRt8I-WC0JB_pBAIlShN4wysf1N3jU4QOHjbSPC9ETrtVrWa-uiAT");'></div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold leading-tight">Papas Rústicas</h3>
+<button aria-label="Eliminar" class="text-slate-400 hover:text-red-500 transition-colors p-1">
+<span class="material-symbols-outlined !text-xl">delete</span>
+</button>
+</div>
+<p class="text-slate-500 dark:text-[#9eb7a8] text-sm mt-1">Con sal de mar, romero fresco y dip de ajo.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xl font-bold text-slate-900 dark:text-white">$9.00 <span class="text-xs font-normal text-slate-500 dark:text-gray-400 ml-1">($4.50 c/u)</span></p>
+<div class="flex items-center gap-3 bg-gray-100 dark:bg-[#111714] rounded-full px-2 py-1 border border-gray-200 dark:border-surface-border">
+<button class="flex size-7 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-surface-border transition-colors text-slate-600 dark:text-gray-300">
+<span class="material-symbols-outlined !text-lg">remove</span>
+</button>
+<span class="w-4 text-center text-sm font-bold">2</span>
+<button class="flex size-7 items-center justify-center rounded-full bg-white dark:bg-surface-border text-primary shadow-sm">
+<span class="material-symbols-outlined !text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group relative flex flex-col sm:flex-row gap-4 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-surface-border p-4 transition-all hover:border-primary/50 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+<div class="relative shrink-0 overflow-hidden rounded-lg w-full sm:w-32 aspect-video sm:aspect-square">
+<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Cold craft cola drink with ice and lemon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAz31LDrSnBQTXfV6idGBs0gwOM3z0nN2K2rTceTIHkV1lz1IVt2_6OlFgDI043-LaRH5EGxYUcep_GosisgOk86BhWrqXKo28aaOyd0ddaj9PE5ZBH7pXJMh7cnyUKMiqfILwemv79L01CxT30ZqzjEQVEsiAsG_NDSpFoEqtPj2uIJEzSp7f5ehbLRl8OKnThFv5T-hQVvkTKgtkI3IccQLsjL_tuTi2m0Qm15IPKp9INuj4ZuAuD-q7MonmvKx1ZreLqL_QCTmLS");'></div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold leading-tight">Refresco Artesanal</h3>
+<button aria-label="Eliminar" class="text-slate-400 hover:text-red-500 transition-colors p-1">
+<span class="material-symbols-outlined !text-xl">delete</span>
+</button>
+</div>
+<p class="text-slate-500 dark:text-[#9eb7a8] text-sm mt-1">Cola natural sin azúcar, receta de la casa.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xl font-bold text-slate-900 dark:text-white">$6.00 <span class="text-xs font-normal text-slate-500 dark:text-gray-400 ml-1">($3.00 c/u)</span></p>
+<div class="flex items-center gap-3 bg-gray-100 dark:bg-[#111714] rounded-full px-2 py-1 border border-gray-200 dark:border-surface-border">
+<button class="flex size-7 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-surface-border transition-colors text-slate-600 dark:text-gray-300">
+<span class="material-symbols-outlined !text-lg">remove</span>
+</button>
+<span class="w-4 text-center text-sm font-bold">2</span>
+<button class="flex size-7 items-center justify-center rounded-full bg-white dark:bg-surface-border text-primary shadow-sm">
+<span class="material-symbols-outlined !text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Column -->
+<div class="w-full lg:w-[380px] shrink-0">
+<div class="sticky top-24 rounded-2xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-surface-border p-6 shadow-xl dark:shadow-none">
+<h2 class="text-xl font-bold mb-6">Resumen del Pedido</h2>
+<div class="flex flex-col gap-4 border-b border-gray-200 dark:border-surface-border pb-6">
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-gray-300">Subtotal</span>
+<span class="font-medium">$27.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-gray-300">Impuestos (8%)</span>
+<span class="font-medium">$2.16</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-gray-300">Envío</span>
+<span class="font-medium text-primary">Gratis</span>
+</div>
+</div>
+<div class="py-6">
+<div class="flex items-end justify-between mb-2">
+<span class="text-lg font-bold">Total</span>
+<span class="text-3xl font-black tracking-tight">$29.16</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-gray-400 text-right">Incluye todos los impuestos</p>
+</div>
+<!-- Promo Code -->
+<div class="mb-6 relative">
+<input class="w-full h-12 rounded-full bg-gray-50 dark:bg-[#111714] border-gray-200 dark:border-surface-border px-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-slate-400 dark:placeholder:text-gray-600" placeholder="Código promocional" type="text"/>
+<button class="absolute right-1 top-1 h-10 px-4 rounded-full text-xs font-bold text-primary hover:bg-primary/10 transition-colors">
+                                APLICAR
+                            </button>
+</div>
+<!-- Main Action -->
+<button class="w-full flex items-center justify-center gap-2 h-14 rounded-full bg-primary text-[#111714] text-lg font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(54,226,123,0.4)]">
+                            Proceder al Checkout
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="mt-4 text-center text-xs text-slate-500 dark:text-gray-500 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined !text-sm">lock</span>
+                            Checkout seguro y encriptado
+                        </p>
+</div>
+</div>
+</div>
+<!-- Upsell / Recommendations -->
+<div class="mt-16 border-t border-gray-200 dark:border-surface-border pt-10">
+<h3 class="text-2xl font-bold mb-6">Completa tu orden</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Recommendation 1 -->
+<div class="flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark p-3 border border-gray-200 dark:border-surface-border hover:border-primary/30 transition-colors group">
+<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-[#111714]">
+<div class="h-full w-full bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Crunchy onion rings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHqRpt-L6WJduIU0-5E1U0kEpC49q37J2cbjV2V7k2ARYTxSfWSiS6uqVHnnyuX2wsXS9E785-J5rZJDbGtAJKWaEC7fF3J85UJnjam3DR348_uEz6rXQom4gdYLKWQd_Is20pw2MqNEabRKAxEtDv45tWX9K8UKl2hufK_LZB7ECnSubVMHEZ8CreOfkmoGgeM45_Hs91cVKEGHCnqdOGun8Ze9sseUb744OriIr3w6ZjyMkS4jHMR3CSNGJePK-HjWHYA6yGgF9b");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-bold text-sm">Aros de Cebolla</p>
+<p class="text-xs text-slate-500 dark:text-[#9eb7a8]">$3.50</p>
+<button class="mt-2 w-full rounded-full bg-gray-100 dark:bg-[#111714] py-2 text-xs font-bold hover:bg-primary hover:text-[#111714] transition-colors">
+                                Agregar
+                            </button>
+</div>
+</div>
+<!-- Recommendation 2 -->
+<div class="flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark p-3 border border-gray-200 dark:border-surface-border hover:border-primary/30 transition-colors group">
+<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-[#111714]">
+<div class="h-full w-full bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Extra cheese dip sauce" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8hoCZbbt2kVQS_azMIeyDEN3BZn4CSC-NX6GU09fH9vpGKunOb0HwGZDLpAHneogvZTrQ50QwTgxKc3pQx9RzI7mhZq26Pz6ximbikA0GcWljskw0B4m4mdhb9FMk7rdNFPgzt4YptT9-MzufPyWuqIJT56yUDgrYHaN7r2iRfm9rMlHiK5hx7dcSAh36LcbmuIsDr5ddiDh_XUu6NXjw1xg-JTE48Sc89epHGURRlO6UQ_tCGV4ehIcYlGpornQLnfIr8tWKwOdo");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-bold text-sm">Dip de Queso</p>
+<p class="text-xs text-slate-500 dark:text-[#9eb7a8]">$1.50</p>
+<button class="mt-2 w-full rounded-full bg-gray-100 dark:bg-[#111714] py-2 text-xs font-bold hover:bg-primary hover:text-[#111714] transition-colors">
+                                Agregar
+                            </button>
+</div>
+</div>
+<!-- Recommendation 3 -->
+<div class="flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark p-3 border border-gray-200 dark:border-surface-border hover:border-primary/30 transition-colors group">
+<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-[#111714]">
+<div class="h-full w-full bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Chocolate artisanal milkshake" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4uWXsFk7Rqix-U44_2JnC-4QcGh2bjvu3INdN4R4JTfNdOzfOvhQcHxcLqFEwa7_flTvFk25Prdpi1iHgsBY3hhne87vEu9mtRevT8Ul6qAkBT4A0uwAOJ5KCtqPniovVyzhuCJsTc0G_6i8847DYNMGpQv9QR-y5ons2xS9srJ9_djGZGsT7JnuQzAsM6aAZIXzzXzDjiyYBNasgyr8Q6RC-aCDBsv6sk_GSklSe30iXl4DoYiSfdRy4_EN2Ha8QErU85UIRPJuR");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-bold text-sm">Batido Chocolate</p>
+<p class="text-xs text-slate-500 dark:text-[#9eb7a8]">$5.00</p>
+<button class="mt-2 w-full rounded-full bg-gray-100 dark:bg-[#111714] py-2 text-xs font-bold hover:bg-primary hover:text-[#111714] transition-colors">
+                                Agregar
+                            </button>
+</div>
+</div>
+<!-- Recommendation 4 -->
+<div class="flex flex-col gap-3 rounded-xl bg-white dark:bg-surface-dark p-3 border border-gray-200 dark:border-surface-border hover:border-primary/30 transition-colors group">
+<div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-[#111714]">
+<div class="h-full w-full bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Spicy buffalo wings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCAZP6TakBULGkVkMMjeXTq7kTwKgmOBf6w68zlMing35bLsglh_xfpreJ5S_f8B1643jztfI5Zn1Y4EWNZkp6nw6KAtT2cGvEZcbV74IZ_mcgNRI-eGDy1pkJsiW1WpF1EfQq5JScRK-M29W2o4zZH1AOocu0aBPZngGAqP1M-39Wa-cC0iRE26VubTRETAAvYoOlbYVR1L0WDQYXerjoQ6_NggFsIV-oSIDXMX3S3XnkS_-QEiG8PXRB-Q07RROoo6P-g3iCpPvHs");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-bold text-sm">Alitas Buffalo</p>
+<p class="text-xs text-slate-500 dark:text-[#9eb7a8]">$7.50</p>
+<button class="mt-2 w-full rounded-full bg-gray-100 dark:bg-[#111714] py-2 text-xs font-bold hover:bg-primary hover:text-[#111714] transition-colors">
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Simple -->
+<footer class="mt-auto border-t border-gray-200 dark:border-surface-border py-8 px-4 text-center">
+<p class="text-sm text-slate-500 dark:text-gray-500">© 2024 Burger Joint. Todos los derechos reservados.</p>
+</footer>
+</div>
+</body></html>

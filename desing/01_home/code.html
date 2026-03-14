@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BurgerBrand - Home</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36e27b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-dark": "#1c2620",
+                        "surface-border": "#29382f",
+                        "text-secondary": "#9eb7a8"
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar hiding */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-background-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navbar -->
+<header class="sticky top-0 z-50 w-full px-4 py-4 md:px-10 lg:px-40 backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 border-b border-surface-border">
+<div class="flex items-center justify-between">
+<!-- Logo -->
+<div class="flex items-center gap-2 text-slate-900 dark:text-white hover:opacity-90 transition-opacity cursor-pointer">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary text-background-dark">
+<span class="material-symbols-outlined text-2xl">lunch_dining</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">BurgerBrand</h2>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold" href="#">Menú</a>
+<a class="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold" href="#">Ubicaciones</a>
+<a class="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold" href="#">Nosotros</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-3">
+<button class="flex size-10 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:bg-opacity-80 transition-colors">
+<span class="material-symbols-outlined !text-xl">search</span>
+</button>
+<button class="relative flex size-10 items-center justify-center rounded-full bg-primary text-[#111714] font-bold hover:bg-opacity-90 transition-colors shadow-[0_0_15px_rgba(54,226,123,0.3)]">
+<span class="material-symbols-outlined !text-xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold">3</span>
+</button>
+<button class="hidden sm:flex h-10 px-4 items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-opacity-80 transition-colors">
+<span class="truncate">Login</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative px-4 py-8 lg:px-40 lg:py-12 overflow-hidden">
+<!-- Decorative Background Elements -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+<div class="absolute -left-20 top-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Text Content -->
+<div class="flex flex-col gap-6 lg:gap-8 z-10 order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 w-fit">
+<span class="material-symbols-outlined text-primary text-sm">local_fire_department</span>
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Nuevo Lanzamiento</span>
+</div>
+<h1 class="text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+                            Sabor Urbano <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Real.</span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-text-secondary max-w-md font-medium">
+                            Carne 100% Angus premium, queso Gouda ahumado y pan brioche horneado hoy. La hamburguesa definitiva ha llegado a la ciudad.
+                        </p>
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<button class="h-14 px-8 rounded-full bg-primary text-background-dark text-base font-bold hover:bg-primary/90 transition-all hover:scale-105 shadow-[0_4px_20px_rgba(54,226,123,0.4)] flex items-center gap-2">
+<span>PEDIR AHORA</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="h-14 px-8 rounded-full border border-slate-300 dark:border-surface-border text-slate-900 dark:text-white text-base font-bold hover:bg-slate-100 dark:hover:bg-surface-border transition-colors">
+                                Ver Menú Completo
+                            </button>
+</div>
+<!-- Stats/Trust -->
+<div class="flex items-center gap-6 pt-6 border-t border-slate-200 dark:border-surface-border mt-2">
+<div class="flex -space-x-3">
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" data-alt="portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn46fE4gbAhN_ZbDxTamDDgGJn4nLi2yURvVicQIcJ9Hjq9-xXqld3Id1IBmTp6EFJjk2EQ2wqvJjJGCbqEEpAr6-NKBPhLCIUYcA1akdSOwP70uFuvpAwJDnM8-4VxSZNkJ5IjgrxpUwj6qbn5_5zvhLl0H4Wxs5EPMeimd8iCh5430oj_82xXZYO38AvRpO5pKutaMFo7bw00FVWhLXtvC7pomwANYFcUpd_wggJcHfBq4X711rIohoqlEjpRZZJW0iw8xpje6zw"/>
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" data-alt="portrait of a man with beard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeNbFTL-uY55ryCCpWS4V6z6aQXH3iuNMoJtQvvnerXjoSXYH3vXr_O1mtyORTlRImsvPUXpHatYKBwWqClRlh4GTin66g-3rHP_uVMlkO-iD3GnUV9lf5LXoB8vMEIDtuQToXQg25eywllbz41huXL81TUxwb5hUlUdc9Hg0GV8gptwksFVvG6sno8OKvifeZ9qQSpFUnJ5zmkKZFxJrZH7yL6z4X4RrwjHhcAEsaNqGGFY-vjhoeF5dlOk3zz2ZeGTOf_gEx2ipC"/>
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" data-alt="portrait of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAla5w0dLFUMJP5j6NxpYlz7YmlSe48gp0irwoVQKm_E2vLCjRp4jn-cHNCCYCi7rRFGHqquVAw03_QaDTz_jrRujNxcXDTDcUCR1WL23M8vkfl6i88z9oM-dExuhws6y2OoTvSx40TDEbw5BveQUWeTuR9TQZal67ys7oH6VG8YyVYH-1VBNVj4I-6kLltO-FbN7pDyNCdRpupI0YqRNJS8Uy1cvQXNr-vVQzgAt2SEhxnML3HqybEfRJ-L6w1TC1ujhVdRwSsjTYZ"/>
+<div class="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark bg-surface-dark flex items-center justify-center text-xs font-bold text-white">
+                                    +2k
+                                </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+</div>
+<span class="text-xs font-medium text-slate-500 dark:text-text-secondary">Clientes satisfechos</span>
+</div>
+</div>
+</div>
+<!-- Image Hero -->
+<div class="relative z-10 flex justify-center order-1 lg:order-2">
+<!-- Background Circle -->
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-dark to-surface-border rounded-full scale-90 -z-10 animate-pulse"></div>
+<div class="relative group cursor-pointer perspective-1000">
+<div class="absolute -top-10 -right-10 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl z-20 shadow-xl rotate-12 animate-[float_4s_ease-in-out_infinite]">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-primary uppercase">Sólo hoy</span>
+<span class="text-2xl font-black text-white">$12.99</span>
+</div>
+</div>
+<img alt="Huge delicious cheeseburger with melting cheese and fresh lettuce" class="w-full max-w-[500px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform transition-transform duration-500 hover:scale-105 hover:rotate-2" data-alt="close up of a juicy cheeseburger with melting cheese" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJFhNiPI-xilHvyT-WN6fY5YEO3d4MzsW_sIga39uvS3T09Ix4dw8Yk4X8fScTZg7bVWy9HjSqK5oXcg_ul5vtQGu-K_HFyNRl59lpQHAzwHusDBtLug8b8vghsmW1a4sLR3_6pK5UI_-yXoXpaA8IUdjTv4sEtlsPpqDV7TpqVPnd8hEwKG9-E3eZcwTPrJxhr7bSPBATaTc6cEhxztO4tvVm1qaurfBtbM53VR3T4jcdkGlO5IcS6OZglx3nEHldny4T4So7RCIX"/>
+<!-- Floating Ingredient Tags -->
+<div class="absolute top-[20%] left-0 -translate-x-4 bg-surface-dark/90 backdrop-blur border border-primary/30 px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-xs font-bold text-white">100% Angus</span>
+</div>
+<div class="absolute bottom-[20%] right-0 translate-x-4 bg-surface-dark/90 backdrop-blur border border-primary/30 px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg">
+<div class="size-2 rounded-full bg-yellow-400"></div>
+<span class="text-xs font-bold text-white">Queso Gouda</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Section (Cards) -->
+<section class="px-4 py-10 lg:px-40 bg-surface-dark/30 border-y border-surface-border/50">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+<div>
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Calidad Artesanal</h2>
+<p class="text-slate-600 dark:text-text-secondary">Ingredientes seleccionados para una experiencia superior.</p>
+</div>
+<a class="text-primary font-bold text-sm hover:underline flex items-center gap-1" href="#">
+                            Conoce nuestra historia <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group p-6 rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Carne Premium</h3>
+<p class="text-sm text-slate-600 dark:text-text-secondary leading-relaxed">
+                                Cortes seleccionados de ganado de pastoreo, molidos diariamente en nuestra cocina para garantizar frescura.
+                            </p>
+</div>
+<!-- Card 2 -->
+<div class="group p-6 rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Pan Brioche</h3>
+<p class="text-sm text-slate-600 dark:text-text-secondary leading-relaxed">
+                                Suave, dorado y con ese toque de mantequilla perfecto. Horneado cada mañana por nuestros panaderos.
+                            </p>
+</div>
+<!-- Card 3 -->
+<div class="group p-6 rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Vegetales Frescos</h3>
+<p class="text-sm text-slate-600 dark:text-text-secondary leading-relaxed">
+                                Directo del huerto a tu hamburguesa. Apoyamos a productores locales para obtener los mejores ingredientes.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Carousel -->
+<section class="px-4 py-16 lg:px-40">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Populares esta semana</h2>
+<div class="flex gap-2">
+<button class="size-10 rounded-full border border-surface-border flex items-center justify-center text-slate-900 dark:text-white hover:bg-surface-border transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 rounded-full bg-primary text-background-dark flex items-center justify-center hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-8 hide-scrollbar snap-x">
+<!-- Item 1 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group">
+<div class="h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+<img alt="Classic Smash Burger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="double patty burger with cheese" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg5apk3Jl1Uywlc43VJHTREwZpIJnjLdhdQSWfb-gFIdOgygeljwnjL1madu7uP0YN5wWoYV7jXNdbzLKdWFBnbHWbqwHN1p3ruqDnEntBgCxCP6ZvTicpfLE_OrJD3XGsJy8btfAxZndD6EmEf2-XlkrFZdHykE1vP34cERoRyLA42t-gICUrmC7e3o4lBOCTzQkt-P7KE9JYG0s4oqmm1X8QRgueZ_had0cSQiiQhmuic8s2yYsSPP__aCtssEkwf3xRj0Si2J9t"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur px-2 py-1 rounded text-white text-xs font-bold">
+                                    Top Ventas
+                                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Classic Smash</h3>
+<span class="text-primary font-bold">$12.00</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">Doble carne smasheada, queso americano, cebolla picada y salsa especial.</p>
+<button class="w-full h-10 rounded-full bg-slate-100 dark:bg-surface-border text-slate-900 dark:text-white font-bold text-sm hover:bg-primary hover:text-background-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                    Agregar al pedido
+                                </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group">
+<div class="h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+<img alt="Double Beast Burger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="massive burger with bacon and onion rings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGS4rNnvIXOEa3nNImLndiGYyl5RN4yT39-v7SqzE7TaEz8W2N3tgjTP27zL4WI09Fx2GIrvFby0dvCfpgCmEgbBS6ZVGUSlf_5UTBuwswoGHhuCz2LyAdFAlY50bnaw3y-KROEV2nLaKmZZyiC5PCMuCA8N_hBb0xBy9BQCZNFo0tj0rmSBbu-dP2eCXVqhT0QFm9Lcr70feUiKh1MSuEermeFgKopQ6G2w86auR-_KWDbBr5uO7aEHonk82gRJpZQMPpP-lhVxBN"/>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Double Beast</h3>
+<span class="text-primary font-bold">$15.50</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">Triple carne, tocino crujiente, aros de cebolla y bbq ahumada.</p>
+<button class="w-full h-10 rounded-full bg-slate-100 dark:bg-surface-border text-slate-900 dark:text-white font-bold text-sm hover:bg-primary hover:text-background-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                    Agregar al pedido
+                                </button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group">
+<div class="h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+<img alt="Crispy Chicken Burger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="crispy fried chicken sandwich with coleslaw" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3yc32W_ZXxuUrGgI-m_WJU7dG6_QAHuGNy3ko9usVsungajd1M-G0OR3zshS3Bsrr3pF3eo3Nt8WmEPsfkx_Y9b0f77sJH1mFjdVQrgFR8qrejtLVK7qfKwHP4NzuEE-SaEoQOp0-I1cIT9ygCBiFINd1YfRK0XTF9uSyNTlOMalfQ6C4ZDrCmvLe7YgKOMDMYN9AY9Cs9KEQ4kxDIO3QIbPbyljOQoWhlMPNtGuB8szY2iegjnY_0jiu_8unwOZ5_Ext26QXl26q"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur px-2 py-1 rounded text-white text-xs font-bold">
+                                    Nuevo
+                                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Crispy Chicken</h3>
+<span class="text-primary font-bold">$11.00</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">Pollo frito marinado en suero de leche, coleslaw y mayonesa picante.</p>
+<button class="w-full h-10 rounded-full bg-slate-100 dark:bg-surface-border text-slate-900 dark:text-white font-bold text-sm hover:bg-primary hover:text-background-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                    Agregar al pedido
+                                </button>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group">
+<div class="h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+<img alt="Veggie Delight" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="veggie burger with avocado and sprouts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADTw7hTJ45oiLJHm1dHFxbSaWDAnUpBY4HYerEJBlQx0-jCoLkDAo3w7Jcg3DZTqb4Fi-qqe3w8Esmv9d9aFUd2fKpi3QiGdl8hqyAJoTCEOQb2R4JcRai6RndI6H7pu785owo4oSQ9lSCUAyr_Psj27bQWXLy7Of_AL07rNZg2DZItn50ciK8-Yc7YDfiaBxAjrOqOIgePInqTlFKW4IumbGof0ATLfX3sGEVJn-2IVT1OOIxTP680tp5OO3MkKLn4efv6rYcclXJ"/>
+<div class="absolute top-3 right-3 bg-green-600/90 backdrop-blur px-2 py-1 rounded text-white text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">eco</span> Vegan
+                                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Veggie Delight</h3>
+<span class="text-primary font-bold">$13.50</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">Medallón de lentejas y champiñones, aguacate, rúcula y tomate.</p>
+<button class="w-full h-10 rounded-full bg-slate-100 dark:bg-surface-border text-slate-900 dark:text-white font-bold text-sm hover:bg-primary hover:text-background-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                    Agregar al pedido
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Sim -->
+<footer class="bg-surface-dark py-8 px-4 lg:px-40 border-t border-surface-border">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-white">
+<div class="flex items-center justify-center size-8 rounded-full bg-primary text-background-dark">
+<span class="material-symbols-outlined text-lg">lunch_dining</span>
+</div>
+<span class="text-lg font-bold">BurgerBrand</span>
+</div>
+<p class="text-text-secondary text-sm">© 2023 BurgerBrand. Todos los derechos reservados.</p>
+<div class="flex gap-4">
+<a class="text-text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
