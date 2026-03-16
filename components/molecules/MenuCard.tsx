@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
@@ -12,7 +13,7 @@ export function MenuCard({ item }: MenuCardProps) {
     return (
         <article className="group flex flex-col overflow-hidden rounded-xl bg-surface-dark border border-surface-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_-10px_rgba(54,226,123,0.2)]">
             {/* Image */}
-            <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-800">
+            <Link href={`/product/${item.id}`} className="relative aspect-4/3 w-full overflow-hidden bg-gray-800">
                 <Image
                     src={item.image}
                     alt={item.name}
@@ -31,14 +32,16 @@ export function MenuCard({ item }: MenuCardProps) {
                         />
                     </div>
                 )}
-            </div>
+            </Link>
 
             {/* Content */}
             <div className="flex flex-col flex-1 p-6">
                 <div className="flex justify-between items-start mb-2 group-hover:transform group-hover:translate-x-1 transition-transform">
-                    <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
-                        {item.name}
-                    </h3>
+                    <Link href={`/product/${item.id}`}>
+                        <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                            {item.name}
+                        </h3>
+                    </Link>
                     <span className="text-lg font-black text-primary">${item.price.toFixed(2)}</span>
                 </div>
 

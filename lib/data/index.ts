@@ -1,4 +1,13 @@
-import type { Product, Feature, CustomerAvatar } from "@/lib/types";
+import type { Product, Feature, CustomerAvatar, Extra } from "@/lib/types";
+
+const COMMON_EXTRAS: Extra[] = [
+    { id: "extra-cheddar", name: "Extra Cheddar", price: 1.5, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAH2cpUcrJxej8pOWrZzcgnb74A5o91ZnHcETnoGAhKM0EISL6Q0p5pXvFqfFAp0-lMVRV1EEH8XeZ5KtKV-L9oSsdJSQuktTsXn-WY71AMDueR1TdAO5i1IynfwfQ0cukJoaeSSSdxWbVMbzNWa3wJg6ymNld5WigAQ5O_ZykGx9298pBO5FH35Ybd8bTMXWHsmgnW0VRlMBNHVLDNqcgeAQg9PuxzHMbvPQ09zwtoXasPwxcQhWkkaNrArUybtSouBFe6jYv4za-G" },
+    { id: "extra-bacon", name: "Extra Bacon", price: 2.0, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAfvQVYUi6TErx7g5IqumPx55aKw2zOj_IlKlXft6LednyztYO0-f_d1qb6Zqp6Dvgz_xN9KEpLJVZnZ0bzVWamhh8BWtTgO7SGprr3N30qBEHR5drEbquzY-jqjdPCAg_K6tLhzMUSD-KYAcaFnBBp61MYRfDlZ-tqilss5U_ejnJf7pnlOILpA_DIUm3lTvlgu5tAVXo0K6JtB5Kg0iKlOn1x3PoDZhf1iL8tFmSCKQlWvZzjTonhJ0GOI4VzNidau" },
+    { id: "extra-huevo", name: "Huevo Frito", price: 1.0, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvKR9RUT_TDXsi_hhIdBjWkaPgt-Ny4SsexDwlm-JMkw9bfFyUsDHAv3YYDwJdqmoOrHTFMWRe3Nrs3esuPr5a8BbFrn5TsQMdjKOyMKveLpNTLuoohE3GEEnbLF_zHC0TJY0dorEVTf78xc7bGZvbpXDo7F-mYqPvC9QOdm3bnoAim9oe09fK_L-XVqWlR7Ir_UKvlYiCLJDRhsz0w1u6J13i_nKLnU_xYqoqO852MibiJjMSZe_gEZFDP_gQ_YGd2rzaFp1jHLw5" },
+    { id: "extra-aguacate", name: "Aguacate", price: 1.75, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCao1cm37FwBiibuFNPJkYB7Em2dBZ7zBOopA_X4YBWtvJj0hf3uMrFo6yAbv41XoyWFuIjoPWcgH6sVp0hBERMtdew1QIxiNw9y7PC0o7LCEy7qPmQV4YVSfLGO3er9VGmhhNKrTAdhk6IGnmc1pPviYAN1i2DJWBOyyV9fNKzpTyV6m0aeaL_aylEwk8N4Jzs4xktac3fp1Epmvs7AShyAt4CFmFKk4T7LFujXy-S5mvojhe_8wbmjMAsW7S2WvtCm4Vz7eopbV8d" },
+];
+
+const COMMON_REMOVABLES = ["Cebolla", "Tomate", "Salsa", "Pepinillos"];
 
 export const PRODUCTS: Product[] = [
     // Secciones Destacadas (Home) + Menú Completo
@@ -16,6 +25,8 @@ export const PRODUCTS: Product[] = [
             label: "Top Ventas",
             variant: "dark",
         },
+        removables: COMMON_REMOVABLES,
+        extras: COMMON_EXTRAS,
     },
     {
         id: "double-beast",
@@ -26,6 +37,8 @@ export const PRODUCTS: Product[] = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuAGS4rNnvIXOEa3nNImLndiGYyl5RN4yT39-v7SqzE7TaEz8W2N3tgjTP27zL4WI09Fx2GIrvFby0dvCfpgCmEgbBS6ZVGUSlf_5UTBuwswoGHhuCz2LyAdFAlY50bnaw3y-KROEV2nLaKmZZyiC5PCMuCA8N_hBb0xBy9BQCZNFo0tj0rmSBbu-dP2eCXVqhT0QFm9Lcr70feUiKh1MSuEermeFgKopQ6G2w86auR-_KWDbBr5uO7aEHonk82gRJpZQMPpP-lhVxBN",
         category: "classics",
         featured: true,
+        removables: COMMON_REMOVABLES,
+        extras: COMMON_EXTRAS,
     },
     {
         id: "crispy-chicken",
@@ -41,6 +54,8 @@ export const PRODUCTS: Product[] = [
             label: "Nuevo",
             variant: "dark",
         },
+        removables: ["Coleslaw", "Salsa", "Pepinillos"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "veggie-delight",
@@ -56,6 +71,8 @@ export const PRODUCTS: Product[] = [
             variant: "green",
             icon: "eco",
         },
+        removables: ["Aguacate", "Rúcula", "Tomate"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "gotham-smash",
@@ -67,6 +84,8 @@ export const PRODUCTS: Product[] = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDS82ttJl6TvnvYf7BJJ3Zv0nKG7gh7V-Z3kfwuRQ_mmTR9ZX2Gu-oIZKVmeSASv7xnPEvXp3YHvRRSsrviJWBUcVxPvPaXnBhhlyroP0Z0aZ_CM0lOTDaUamGkizsGaM5WQx5V48qHD4Se4PGLK_PPWrMZgdRVEVXlkOxGVgx_6TpWaOdvWWJnr_vCzykoos_PTykdR0a9V0TsXlhjSWKHl6MB6CYnNPMU1B2cQ-Nemfu6R-UdvgdYTiMRmP3nNhRMHp15pDr6WfKu",
         category: "smash",
         badge: { label: "Best Seller", variant: "dark" },
+        removables: COMMON_REMOVABLES,
+        extras: COMMON_EXTRAS,
     },
     {
         id: "spicy-inferno",
@@ -78,6 +97,8 @@ export const PRODUCTS: Product[] = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDp-c2TnFzz9gzD1j2pJnRPTGUfEA40PU1bZZsCRk-ewq4WPJyUq5RbrXINeZEzzGkRFmF-lip2qz_oBHU1lWa3t702aSQ3M6272T8hyOP66iAkDVK98F4-DAipW-GlGOyDGkNciKpyV0255zJfmfIJpSI3WsTV9xZt8JWvSGfL7AqpVwdu9cyKeDcXtMKHb1o_IWofSDJvDtjUBGAbSz464QLG09j9ngamxVXnQuyQw4Z4RRFOgmaMGw1T19hBChZg2La5aHvfCouZ",
         category: "smash",
         badge: { label: "Spicy", variant: "spicy" },
+        removables: ["Jalapeños", "Salsa", "Cebolla"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "classic-cheese",
@@ -88,6 +109,8 @@ export const PRODUCTS: Product[] = [
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuCdHLrA2JNUdK0pRw_rS8MAusNzknpZc7ZaDLvh_hS0l1VId6WJmB39XefrKoKR2G4QjFRvry7j7Cwn-4aoQ3QxOx15CyI62Bn-g8e2ceu8t0XHm4EicAuq3pu8J5ynsBoBAWYuGv1U-dBqjJwZbbkDQD2Sb44kBos5S8Yr4wUjgvPO7z4O2tTlTP7w6K-yMeVuwixUvGm-wiLTBWicTVi00tfMOJSMjgz85QHMOnvgTg6K-lodYpWQZXdlUKYQHiZVwQmKxvsX7RMi",
         category: "classics",
+        removables: ["Lechuga", "Tomate", "Pepinillos", "Salsa"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "truffle-mushroom",
@@ -98,6 +121,8 @@ export const PRODUCTS: Product[] = [
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuCDiumeaOzCPnWQUds-hbb2EjCeMBrV_TcELDNGynm58F99WMpTNwqG4YK0l5Laun0Y3DVRjOUUQZzxXCJNqRrCidMxW-DeudsGpd5ueRIjeJd5a6kaE8EvALWp0etJOqjvWPNqZYtaOYoL3Part4wfPhxB1N-OGEYB2Uh07fa_BZF9aijq6GXsK_cnbWe7YCPHjsD0zqLh-l4QGehbDzO3b3FMUIOLI8XZ3xvHeswyfYpp8Vh05fYzegFYwrs1DT22rkIGxFrobjVn",
         category: "classics",
+        removables: ["Champiñones", "Salsa", "Rúcula"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "crispy-clucker",
@@ -108,6 +133,8 @@ export const PRODUCTS: Product[] = [
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDmbuFylThp4FgLZArTssqKf5KlK3s2Gjrng0xF8HMxSYJKCA_QbeSIHi6lhqinhCA1udFLmxMuNl6Sq1VEGtQ4jRP6-1v1U9SKKW9zY-QiXnP-W0kmj3oQS9JG65wL45bBoFFPzu9pJ7QC7KdckeqBSOzlRSiMbeqKAGNoYEriMypENH3xOSM3ebMHEED9CM6yL-glVJaAMpeTU4l8Z7Tcx-7-ARoEpjia9ymqsiX-dAInfgxjQAbvE03zEgyyNFLbcYktjw82fN5-",
         category: "chicken",
+        removables: ["Ensalada de col", "Salsa", "Pepinillos"],
+        extras: COMMON_EXTRAS,
     },
     {
         id: "green-giant",
@@ -119,8 +146,11 @@ export const PRODUCTS: Product[] = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDQR9xqu1cyTTQFzJDOjhUsa3yzkkAyBz3zW5y9GcG4TK-0jCqb1Bpuw_8GvoBqLT5udK_e5MFophIwaxDXl4kZNE4j6uXHmOHep6YT8GIrynm3E6GgapAXdJQ9h5QBhiAU_wE9gPc_pTgUPoszUZpmBhYB7zh_wdjny6KHUzJ2WiOBcI5-YKnN432GWSYwWxgBiMssirdraarI5dQB98y7Cm26rKCbk_MoLpm1c8_xfTx4FOgFP0sh31ezjE0A2tdRjVJol3bhZHX_",
         category: "plant-based",
         badge: { label: "Vegan", variant: "vegan" },
+        removables: ["Aguacate", "Tomate"],
+        extras: COMMON_EXTRAS,
     },
 ];
+
 
 export const FEATURES: Feature[] = [
     {

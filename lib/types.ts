@@ -7,6 +7,16 @@ export interface Product {
     category: MenuCategory;
     featured?: boolean;
     badge?: ProductBadge;
+    gallery?: string[];
+    removables?: string[];
+    extras?: Extra[];
+}
+
+export interface Extra {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
 }
 
 export interface ProductBadge {

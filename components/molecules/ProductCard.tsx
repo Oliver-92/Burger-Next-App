@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/atoms/Badge";
 import { Icon } from "@/components/atoms/Icon";
 import type { Product } from "@/lib/types";
@@ -13,7 +14,7 @@ export function ProductCard({ product }: ProductCardProps) {
     return (
         <article className="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group shrink-0">
             {/* Image */}
-            <div className="h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+            <Link href={`/product/${product.id}`} className="block h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
                 <Image
                     src={product.image}
                     alt={product.name}
@@ -30,14 +31,16 @@ export function ProductCard({ product }: ProductCardProps) {
                         />
                     </div>
                 )}
-            </div>
+            </Link>
 
             {/* Content */}
             <div className="p-5">
                 <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                        {product.name}
-                    </h3>
+                    <Link href={`/product/${product.id}`}>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white hover:text-primary transition-colors">
+                            {product.name}
+                        </h3>
+                    </Link>
                     <span className="text-primary font-bold">{formattedPrice}</span>
                 </div>
                 <p className="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">
