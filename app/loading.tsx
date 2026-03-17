@@ -3,10 +3,10 @@
  * Displays a centered animated spinner while async operations are in progress.
  * @param {string} [message] - Optional text displayed below the spinner.
  */
-const LoadingSpinner = ({ message = "Cargando..." }) => {
+const LoadingSpinner = ({ message = "Cargando..." }: { message: string }) => {
 
     return (
-        <div className="flex flex-col items-center justify-center w-full py-48 gap-5">
+        <div className="flex flex-col items-center justify-center w-full flex-1 gap-5">
 
             {/* Spinner stack */}
             <div className="relative flex items-center justify-center">
