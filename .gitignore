@@ -41,8 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 # design resources
-/desing
-GEMINI.md
+# /desing
+# GEMINI.md
 
 # agent
-/.agent
+# /.agent

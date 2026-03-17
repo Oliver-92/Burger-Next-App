@@ -17,7 +17,7 @@ export function Navbar() {
                         Menú
                     </Link>
                     <Link
-                        href="#"
+                        href="/ubicaciones"
                         className="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold"
                     >
                         Ubicaciones

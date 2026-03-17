@@ -37,6 +37,16 @@ export interface CustomerAvatar {
     alt: string;
 }
 
+export interface Location {
+    id: string;
+    name: string;
+    address: string;
+    phone: string;
+    hours: string;
+    mapsUrl: string;
+    image: string;
+}
+
 const MENU_CATEGORY = {
     ALL: "all",
     SMASH: "smash",
@@ -47,3 +57,4 @@ const MENU_CATEGORY = {
 
 export type MenuCategory = (typeof MENU_CATEGORY)[keyof typeof MENU_CATEGORY];
 export { MENU_CATEGORY };
+
