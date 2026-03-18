@@ -69,7 +69,7 @@ export const PRODUCTS: Product[] = [
         badge: {
             label: "Vegan",
             variant: "green",
-            icon: "eco",
+            icon: "Leaf",
         },
         removables: ["Aguacate", "Rúcula", "Tomate"],
         extras: COMMON_EXTRAS,
@@ -96,7 +96,7 @@ export const PRODUCTS: Product[] = [
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDp-c2TnFzz9gzD1j2pJnRPTGUfEA40PU1bZZsCRk-ewq4WPJyUq5RbrXINeZEzzGkRFmF-lip2qz_oBHU1lWa3t702aSQ3M6272T8hyOP66iAkDVK98F4-DAipW-GlGOyDGkNciKpyV0255zJfmfIJpSI3WsTV9xZt8JWvSGfL7AqpVwdu9cyKeDcXtMKHb1o_IWofSDJvDtjUBGAbSz464QLG09j9ngamxVXnQuyQw4Z4RRFOgmaMGw1T19hBChZg2La5aHvfCouZ",
         category: "smash",
-        badge: { label: "Spicy", variant: "spicy" },
+        badge: { label: "Spicy", variant: "spicy", icon: "Flame" },
         removables: ["Jalapeños", "Salsa", "Cebolla"],
         extras: COMMON_EXTRAS,
     },
@@ -155,21 +155,21 @@ export const PRODUCTS: Product[] = [
 export const FEATURES: Feature[] = [
     {
         id: "carne-premium",
-        icon: "restaurant",
+        icon: "Utensils",
         title: "Carne Premium",
         description:
             "Cortes seleccionados de ganado de pastoreo, molidos diariamente en nuestra cocina para garantizar frescura.",
     },
     {
         id: "pan-brioche",
-        icon: "local_pizza",
+        icon: "Pizza",
         title: "Pan Brioche",
         description:
             "Suave, dorado y con ese toque de mantequilla perfecto. Horneado cada mañana por nuestros panaderos.",
     },
     {
         id: "vegetales-frescos",
-        icon: "eco",
+        icon: "Leaf",
         title: "Vegetales Frescos",
         description:
             "Directo del huerto a tu hamburguesa. Apoyamos a productores locales para obtener los mejores ingredientes.",

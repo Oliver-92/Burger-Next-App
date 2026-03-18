@@ -47,6 +47,24 @@ export interface Location {
     image: string;
 }
 
+export interface Value {
+    id: string;
+    icon: string;
+    title: string;
+    description: string;
+}
+
+export interface AboutContent {
+    title: string;
+    subtitle: string;
+    storyTitle: string;
+    storyContent: string[];
+    storyImage: string;
+    valuesTitle: string;
+    values: Value[];
+}
+
+
 const MENU_CATEGORY = {
     ALL: "all",
     SMASH: "smash",

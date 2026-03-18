@@ -26,21 +26,21 @@ export function LocationCard({ location }: LocationCardProps) {
                 
                 <div className="space-y-3 mb-6 flex-1">
                     <div className="flex items-start gap-3">
-                        <Icon name="location_on" className="text-primary mt-0.5 shrink-0" size="sm" />
+                        <Icon name="MapPin" className="text-primary mt-0.5 shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary">
                             {location.address}
                         </span>
                     </div>
                     
                     <div className="flex items-center gap-3">
-                        <Icon name="call" className="text-primary shrink-0" size="sm" />
+                        <Icon name="Phone" className="text-primary shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary">
                             {location.phone}
                         </span>
                     </div>
                     
                     <div className="flex items-start gap-3">
-                        <Icon name="schedule" className="text-primary mt-0.5 shrink-0" size="sm" />
+                        <Icon name="Clock" className="text-primary mt-0.5 shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary leading-tight">
                             {location.hours}
                         </span>
@@ -53,7 +53,7 @@ export function LocationCard({ location }: LocationCardProps) {
                     rel="noopener noreferrer"
                     className="w-full h-11 rounded-xl bg-primary text-background-dark font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
-                    <Icon name="map" size="sm" />
+                    <Icon name="Map" size="sm" />
                     Cómo llegar
                 </a>
             </div>

@@ -42,8 +42,8 @@ export const FILTER_OPTIONS: Array<{
     icon?: string;
 }> = [
         { category: MENU_CATEGORY.ALL, label: "Todos" },
-        { category: MENU_CATEGORY.SMASH, label: "Smash", icon: "local_fire_department" },
-        { category: MENU_CATEGORY.CLASSICS, label: "Clásicas", icon: "favorite" },
-        { category: MENU_CATEGORY.CHICKEN, label: "Pollo", icon: "egg_alt" },
-        { category: MENU_CATEGORY.PLANT_BASED, label: "Vegano", icon: "eco" },
+        { category: MENU_CATEGORY.SMASH, label: "Smash", icon: "Flame" },
+        { category: MENU_CATEGORY.CLASSICS, label: "Clásicas", icon: "Heart" },
+        { category: MENU_CATEGORY.CHICKEN, label: "Pollo", icon: "Drumstick" },
+        { category: MENU_CATEGORY.PLANT_BASED, label: "Vegano", icon: "Leaf" },
     ];

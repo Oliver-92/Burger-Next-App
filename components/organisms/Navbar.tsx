@@ -23,7 +23,7 @@ export function Navbar() {
                         Ubicaciones
                     </Link>
                     <Link
-                        href="#"
+                        href="/nosotros"
                         className="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold"
                     >
                         Nosotros

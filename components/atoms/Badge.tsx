@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Icon } from "./Icon";
 
 interface BadgeProps {
     label: string;
@@ -27,7 +28,7 @@ export function Badge({
             )}
         >
             {icon && (
-                <span className="material-symbols-outlined text-[12px]">{icon}</span>
+                <Icon name={icon} size="sm" className="text-[12px]!" />
             )}
             {label}
         </div>
