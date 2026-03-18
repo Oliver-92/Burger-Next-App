@@ -62,10 +62,7 @@ export function Icon({ name, className, size = "md" }: IconProps) {
 
     // Final fallbacks if indexing failed
     if (!LucideIcon) {
-        if (lucideName === "Burger") LucideIcon = LucideIcons.Hamburger as React.ElementType;
-        else if (lucideName === "ArrowForward") LucideIcon = LucideIcons.ArrowRight as React.ElementType;
-        else if (lucideName === "ArrowBack") LucideIcon = LucideIcons.ArrowLeft as React.ElementType;
-        else LucideIcon = LucideIcons.HelpCircle as React.ElementType;
+        LucideIcon = LucideIcons.HelpCircle as React.ElementType;
     }
 
     return (
