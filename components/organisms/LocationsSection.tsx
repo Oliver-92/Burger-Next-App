@@ -30,9 +30,9 @@ export function LocationsSection({ locations }: LocationsSectionProps) {
                 <h3 className="text-2xl font-bold dark:text-white mb-4">¿Buscas algo más rápido?</h3>
                 <p className="text-slate-500 dark:text-text-secondary mb-8">También estamos presentes en las principales plataformas de delivery.</p>
                 <div className="flex flex-wrap justify-center gap-6 opacity-60">
-                    <div className="px-6 py-2 bg-white dark:bg-background-dark grayscale border-2 border-slate-200 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-400 cursor-pointer">Rappi</div>
-                    <div className="px-6 py-2 bg-white dark:bg-background-dark grayscale border-2 border-slate-200 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-400 cursor-pointer">PedidosYa</div>
-                    <div className="px-6 py-2 bg-white dark:bg-background-dark grayscale border-2 border-slate-200 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-400 cursor-pointer">Uber Eats</div>
+                    <div className="px-6 py-2 bg-gray-900 border-2 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-200 cursor-pointer">Rappi</div>
+                    <div className="px-6 py-2 bg-gray-900 border-2 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-200 cursor-pointer">PedidosYa</div>
+                    <div className="px-6 py-2 bg-gray-900 border-2 dark:border-surface-border hover:border-primary hover:border-solid transition-all rounded-xl font-bold text-slate-200 cursor-pointer">Uber Eats</div>
                 </div>
             </div>
         </section>
