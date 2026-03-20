@@ -38,7 +38,7 @@ export function CustomerAvatars({
             <div className="flex flex-col">
                 <div className="flex items-center gap-1 text-yellow-400">
                     {Array.from({ length: rating }).map((_, i) => (
-                        <Icon key={i} name="star" size="sm" />
+                        <Icon key={i} name="star" size="sm" fill="yellow" />
                     ))}
                 </div>
                 <span className="text-xs font-medium text-slate-500 dark:text-text-secondary">

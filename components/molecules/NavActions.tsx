@@ -6,10 +6,6 @@ import { Button } from "@/components/atoms/Button";
 export function NavActions() {
     return (
         <div className="flex items-center justify-end gap-3">
-            {/* Search */}
-            <Button variant="icon" aria-label="Buscar">
-                <Icon name="search" size="md" />
-            </Button>
 
             {/* Cart */}
             <button
@@ -23,7 +19,7 @@ export function NavActions() {
             </button>
 
             {/* Login */}
-            <Button variant="ghost" className="flex items-center">
+            <Button variant="ghost" className="hidden lg:flex items-center">
                 Login
             </Button>
         </div>

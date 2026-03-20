@@ -5,6 +5,7 @@ interface IconProps {
     name: string;
     className?: string;
     size?: "sm" | "md" | "lg" | "xl";
+    fill?: string | null;
 }
 
 const sizeMap = {
@@ -14,7 +15,7 @@ const sizeMap = {
     xl: 32,
 };
 
-export function Icon({ name, className, size = "md" }: IconProps) {
+export function Icon({ name, className, size = "md", fill = "transparent" }: IconProps) {
     // Map Material Symbol names to Lucide icon names
     const iconMap: Record<string, string> = {
         add: "Plus",
@@ -70,6 +71,7 @@ export function Icon({ name, className, size = "md" }: IconProps) {
             className={cn("shrink-0", className)}
             size={sizeMap[size]}
             strokeWidth={2.5}
+            fill={fill}
         />
     );
 }

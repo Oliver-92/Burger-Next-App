@@ -11,7 +11,7 @@ interface FilterBarProps {
 export function FilterBar({ active, onChange }: FilterBarProps) {
     return (
         <div className="w-full px-4 md:px-10 py-4 max-w-[1280px] mx-auto sticky top-[65px] z-40 bg-background-dark/95 backdrop-blur-sm border-b border-surface-border/50 md:border-none">
-            <div className="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
+            <div className="flex flex-wrap justify-center gap-3 overflow-x-auto pb-2 hide-scrollbar">
                 {FILTER_OPTIONS.map((opt) => (
                     <FilterChip
                         key={opt.category}
