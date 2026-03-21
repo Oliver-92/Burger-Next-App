@@ -1,9 +1,12 @@
 "use client";
 
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 import { Icon } from "@/components/atoms/Icon";
-import { Button } from "@/components/atoms/Button";
 
 export function NavActions() {
+    const { data: session } = useSession();
+
     return (
         <div className="flex items-center justify-end gap-3">
 
@@ -18,10 +21,31 @@ export function NavActions() {
                 </span>
             </button>
 
-            {/* Login */}
-            <Button variant="ghost" className="hidden lg:flex items-center">
-                Login
-            </Button>
+            {/* Auth action */}
+            {session ? (
+                <div className="hidden lg:flex items-center gap-3">
+                    {/* User avatar initials */}
+                    <div
+                        className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary"
+                        title={session.user?.email ?? ""}
+                    >
+                        {session.user?.name?.charAt(0).toUpperCase() ?? "U"}
+                    </div>
+                    <button
+                        onClick={() => signOut({ callbackUrl: "/" })}
+                        className="text-sm font-semibold text-text-secondary hover:text-white transition-colors cursor-pointer"
+                    >
+                        <Icon name="logout" size="md" />
+                    </button>
+                </div>
+            ) : (
+                <Link
+                    href="/login"
+                    className="hidden lg:flex items-center text-sm font-semibold text-text-secondary hover:text-white transition-colors"
+                >
+                    Login
+                </Link>
+            )}
         </div>
     );
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Spline_Sans } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/organisms/Navbar";
+import { Footer } from "@/components/organisms/Footer";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const splineSans = Spline_Sans({
   subsets: ["latin"],
@@ -13,9 +16,6 @@ export const metadata: Metadata = {
   description:
     "Carne 100% Angus premium, queso Gouda ahumado y pan brioche horneado hoy. La hamburguesa definitiva ha llegado a la ciudad.",
 };
-
-import { Navbar } from "@/components/organisms/Navbar";
-import { Footer } from "@/components/organisms/Footer";
 
 export default function RootLayout({
   children,
@@ -33,13 +33,15 @@ export default function RootLayout({
       <body
         className={`${splineSans.variable} font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-background-dark`}
       >
-        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-          <Navbar />
-          <div className="flex-1 flex flex-col">
-            {children}
+        <AuthProvider>
+          <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+            <Navbar />
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </AuthProvider>
       </body>
     </html>
   );

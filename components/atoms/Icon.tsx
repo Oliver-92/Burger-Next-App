@@ -53,6 +53,7 @@ export function Icon({ name, className, size = "md", fill = "transparent" }: Ico
         remove_circle_outline: "MinusCircle",
         add_circle_outline: "PlusCircle",
         check: "Check",
+        logout: "LogOut",
     };
 
     const lucideName = (iconMap[name] ||

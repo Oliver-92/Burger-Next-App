@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/utils";
 
 export function MobileMenu() {
+    const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
 
     // Lock scroll when menu is open
@@ -83,13 +85,36 @@ export function MobileMenu() {
                     </Link>
 
                     {/* Extra mobile-only action */}
-                    <Link
-                        href="/login"
-                        onClick={closeMenu}
-                        className="mt-6 mb-6 px-12 py-4 bg-primary text-background-dark font-bold text-xl rounded-full transition-all hover:brightness-110 active:scale-95 shadow-[0_0_30px_rgba(54,226,123,0.5)]"
-                    >
-                        Iniciar Sesión
-                    </Link>
+                    {session ? (
+                        <div className="flex flex-col items-center gap-6 mt-4">
+                            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-surface-dark border border-surface-border">
+                                <div className="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold">
+                                    {session.user?.name?.charAt(0).toUpperCase() ?? "U"}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-white font-semibold text-sm">{session.user?.name}</span>
+                                    <span className="text-text-secondary text-xs">{session.user?.email}</span>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    closeMenu();
+                                    signOut({ callbackUrl: "/" });
+                                }}
+                                className="px-12 py-4 border-2 border-primary text-primary font-bold text-xl rounded-full transition-all hover:bg-primary hover:text-background-dark active:scale-95"
+                            >
+                                Cerrar Sesión
+                            </button>
+                        </div>
+                    ) : (
+                        <Link
+                            href="/login"
+                            onClick={closeMenu}
+                            className="mt-6 mb-6 px-12 py-4 bg-primary text-background-dark font-bold text-xl rounded-full transition-all hover:brightness-110 active:scale-95 shadow-[0_0_30px_rgba(54,226,123,0.5)]"
+                        >
+                            Iniciar Sesión
+                        </Link>
+                    )}
                 </nav>
             </div>
         </div>
