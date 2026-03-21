@@ -11,7 +11,7 @@ export function Navbar() {
 
                 <div className="flex items-center gap-2 md:gap-4">
                     {/* Desktop Nav */}
-                    <nav className="hidden lg:flex items-center gap-8 mr-8">
+                    <nav className="hidden md:flex items-center gap-8 mr-8">
                         <Link
                             href="/menu"
                             className="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold"
@@ -31,7 +31,8 @@ export function Navbar() {
                             Nosotros
                         </Link>
                     </nav>
-
+                </div>
+                <div className="flex items-center gap-2 md:gap-4">
                     <NavActions />
                     <MobileMenu />
                 </div>

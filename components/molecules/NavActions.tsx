@@ -23,7 +23,7 @@ export function NavActions() {
 
             {/* Auth action */}
             {session ? (
-                <div className="hidden lg:flex items-center gap-3">
+                <div className="hidden md:flex items-center gap-3">
                     {/* User avatar initials */}
                     <div
                         className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary"
