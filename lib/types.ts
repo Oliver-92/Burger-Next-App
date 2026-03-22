@@ -65,6 +65,28 @@ export interface AboutContent {
 }
 
 
+export interface CartItem {
+    id: string; // Unique ID (productId + customizations hash)
+    product: Product;
+    quantity: number;
+    selectedExtras: Extra[];
+    removedIngredients: string[];
+    notes?: string;
+}
+
+export interface CartStore {
+    items: CartItem[];
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+    addItem: (item: Omit<CartItem, "id">) => void;
+    removeItem: (id: string) => void;
+    updateQuantity: (id: string, quantity: number) => void;
+    clearCart: () => void;
+    totalItems: number;
+    totalPrice: number;
+}
+
+
 const MENU_CATEGORY = {
     ALL: "all",
     SMASH: "smash",

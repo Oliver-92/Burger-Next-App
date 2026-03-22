@@ -4,12 +4,29 @@ import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import type { Product } from "@/lib/types";
+import { useCartStore } from "@/lib/store/useCart";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface MenuCardProps {
     item: Product;
 }
 
 export function MenuCard({ item }: MenuCardProps) {
+    const addItem = useCartStore((state) => state.addItem);
+    const [isAdded, setIsAdded] = useState(false);
+
+    const handleAdd = () => {
+        addItem({
+            product: item,
+            quantity: 1,
+            selectedExtras: [],
+            removedIngredients: [],
+        });
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 2000);
+    };
+
     return (
         <article className="group flex flex-col overflow-hidden rounded-xl bg-surface-dark border border-surface-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_-10px_rgba(54,226,123,0.2)]">
             {/* Image */}
@@ -51,9 +68,14 @@ export function MenuCard({ item }: MenuCardProps) {
 
                 {/* Actions */}
                 <div className="mt-auto pt-4 flex gap-3">
-                    <Button variant="light" className="flex-1">
-                        <Icon name="add_shopping_cart" size="sm" />
-                        Agregar al carrito
+                    <Button
+                        variant={isAdded ? "primary" : "light"}
+                        className="flex-1 transition-all"
+                        onClick={handleAdd}
+                        disabled={isAdded}
+                    >
+                        <Icon name={isAdded ? "check" : "add_shopping_cart"} size="sm" />
+                        {isAdded ? "¡Añadido!" : "Agregar al carrito"}
                     </Button>
                 </div>
             </div>

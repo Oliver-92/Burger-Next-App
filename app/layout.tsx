@@ -3,6 +3,8 @@ import { Spline_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/organisms/Navbar";
 import { Footer } from "@/components/organisms/Footer";
+import { FloatingCart } from "@/components/organisms/FloatingCart";
+import { CartSheet } from "@/components/organisms/CartSheet";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const splineSans = Spline_Sans({
@@ -40,6 +42,8 @@ export default function RootLayout({
               {children}
             </div>
             <Footer />
+            <FloatingCart />
+            <CartSheet />
           </div>
         </AuthProvider>
       </body>

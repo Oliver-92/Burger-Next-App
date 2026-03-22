@@ -10,15 +10,19 @@ import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import { ExtraCard } from "@/components/molecules/ExtraCard";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/types";
+import { useCartStore } from "@/lib/store/useCart";
 
 interface ProductDetailProps {
     product: Product;
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
+    const addItem = useCartStore((state) => state.addItem);
     const [quantity, setQuantity] = useState(1);
     const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
     const [removedIngredients, setRemovedIngredients] = useState<string[]>([]);
+    const [isAdded, setIsAdded] = useState(false);
+    const [notes, setNotes] = useState("");
 
     const toggleExtra = (id: string) => {
         setSelectedExtras((prev) =>
@@ -37,6 +41,23 @@ export function ProductDetail({ product }: ProductDetailProps) {
         .reduce((sum, e) => sum + e.price, 0);
 
     const totalPrice = (product.price + extrasTotal) * quantity;
+
+    const handleAddOrder = () => {
+        const productExtras = (product.extras || []).filter((e) =>
+            selectedExtras.includes(e.id)
+        );
+
+        addItem({
+            product,
+            quantity,
+            selectedExtras: productExtras,
+            removedIngredients,
+            notes,
+        });
+
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 2000);
+    };
 
     return (
         <div className="layout-content-container flex flex-col max-w-[1280px] flex-1">
@@ -178,6 +199,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
                             className="w-full bg-surface-dark border border-surface-border rounded-xl p-3 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder-[#586b60] resize-none"
                             placeholder="Ej: La carne bien cocida, salsa aparte..."
                             rows={2}
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
                         ></textarea>
                     </div>
 
@@ -195,9 +218,17 @@ export function ProductDetail({ product }: ProductDetailProps) {
                                     <p className="text-white text-2xl font-bold">${totalPrice.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <Button variant="primary" className="w-full h-14 bg-primary hover:bg-primary-hover text-black text-lg font-bold rounded-full flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(54,226,123,0.3)] hover:shadow-[0_0_30px_rgba(54,226,123,0.5)] transition-all transform active:scale-[0.98]">
-                                <Icon name="shopping_bag" size="md" className="font-bold" />
-                                Agregar al pedido
+                            <Button
+                                variant="primary"
+                                onClick={handleAddOrder}
+                                disabled={isAdded}
+                                className={cn(
+                                    "w-full h-14 bg-primary hover:bg-primary-hover text-black text-lg font-bold rounded-full flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]",
+                                    isAdded ? "grayscale opacity-80" : "shadow-[0_0_20px_rgba(54,226,123,0.3)] hover:shadow-[0_0_30px_rgba(54,226,123,0.5)]"
+                                )}
+                            >
+                                <Icon name={isAdded ? "check" : "shopping_bag"} size="md" className="font-bold" />
+                                {isAdded ? "¡Añadido!" : "Agregar al pedido"}
                             </Button>
                         </div>
                     </div>
