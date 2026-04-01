@@ -1,15 +1,40 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 import { Icon } from "@/components/atoms/Icon";
 import { useCartStore } from "@/lib/store/useCart";
 import { useHydrated } from "@/lib/hooks/useHydrated";
+import type { User } from "@supabase/supabase-js";
 
 export function NavActions() {
-    const { data: session } = useSession();
+    const [user, setUser] = useState<User | null>(null);
+    const router = useRouter();
     const totalItems = useCartStore((state) => state.totalItems);
     const hydrated = useHydrated();
+
+    useEffect(() => {
+        const supabase = createClient();
+
+        supabase.auth.getUser().then(({ data }) => {
+            setUser(data.user);
+        });
+
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, []);
+
+    async function handleSignOut() {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        router.push("/");
+        router.refresh();
+    }
 
     return (
         <div className="flex items-center justify-end gap-3">
@@ -29,17 +54,17 @@ export function NavActions() {
             </button>
 
             {/* Auth action */}
-            {session ? (
+            {user ? (
                 <div className="hidden md:flex items-center gap-3">
                     {/* User avatar initials */}
                     <div
                         className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary"
-                        title={session.user?.email ?? ""}
+                        title={user.email ?? ""}
                     >
-                        {session.user?.name?.charAt(0).toUpperCase() ?? "U"}
+                        {user.email?.charAt(0).toUpperCase() ?? "U"}
                     </div>
                     <button
-                        onClick={() => signOut({ callbackUrl: "/" })}
+                        onClick={handleSignOut}
                         className="text-sm font-semibold text-text-secondary hover:text-white transition-colors cursor-pointer"
                     >
                         <Icon name="logout" size="md" />

@@ -187,13 +187,13 @@ if (session?.user.role !== "admin") {
 
 ---
 
-## 🧩 Middleware حماية rutas
+## 🧩 Middleware (proxy.ts) para proteger rutas
 
 ```ts
-// middleware.ts
+// proxy.ts
 import { NextResponse } from "next/server"
 
-export function middleware(req) {
+export function proxy(req) {
   const token = req.cookies.get("next-auth.session-token")
 
   if (!token) {
@@ -267,7 +267,7 @@ When implementing Auth.js:
 2. Default to JWT unless DB sessions are required
 3. Enforce role-based access early
 4. Never expose sensitive data to client
-5. Use middleware for global protection
+5. Use middleware (proxy.ts) for global protection
 6. Prefer App Router patterns over Pages Router
 
 ---

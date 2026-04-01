@@ -34,7 +34,7 @@ export function MenuGrid({ items }: MenuGridProps) {
             </div>
 
             {/* Mobile floating cart */}
-            <FloatingCart itemCount={2} total={24.0} />
+            <FloatingCart />
         </>
     );
 }

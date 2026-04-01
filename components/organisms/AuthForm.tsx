@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/atoms/Icon";
+import { createClient } from "@/lib/supabase/client";
 import {
     loginSchema,
     registerSchema,
@@ -72,16 +72,18 @@ function LoginForm() {
 
     async function onSubmit(data: LoginFormData) {
         setServerError(null);
-        const result = await signIn("credentials", {
+        const supabase = createClient();
+
+        const { error } = await supabase.auth.signInWithPassword({
             email: data.email,
             password: data.password,
-            redirect: false,
         });
 
-        if (result?.error) {
+        if (error) {
             setServerError("Email o contraseña incorrectos");
             return;
         }
+
         router.push("/");
         router.refresh();
     }
@@ -124,6 +126,7 @@ function LoginForm() {
 function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     const router = useRouter();
     const [serverError, setServerError] = useState<string | null>(null);
+    const [emailSent, setEmailSent] = useState(false);
 
     const {
         register,
@@ -133,45 +136,51 @@ function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
     async function onSubmit(data: RegisterFormData) {
         setServerError(null);
+        const supabase = createClient();
 
-        const res = await fetch("/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
-
-        if (!res.ok) {
-            const json = await res.json();
-            setServerError(json.error ?? "Error al registrarse");
-            return;
-        }
-
-        // Auto-login after successful register
-        const result = await signIn("credentials", {
+        const { data: signUpData, error } = await supabase.auth.signUp({
             email: data.email,
             password: data.password,
-            redirect: false,
         });
 
-        if (result?.error) {
-            // Register worked but auto-login failed — switch to login tab
-            onSuccess();
+        if (error) {
+            setServerError(error.message ?? "Error al registrarse");
             return;
         }
 
-        router.push("/");
-        router.refresh();
+        // If Supabase returns a session immediately, email confirmation is OFF → auto-login
+        if (signUpData.session) {
+            router.push("/");
+            router.refresh();
+            return;
+        }
+
+        // Email confirmation is ON → ask user to check their inbox
+        setEmailSent(true);
+    }
+
+    if (emailSent) {
+        return (
+            <div className="flex flex-col items-center gap-4 py-4 text-center">
+                <div className="size-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+                    <Icon name="mark_email_read" size="lg" className="text-primary" />
+                </div>
+                <p className="text-white font-semibold">Revisa tu correo</p>
+                <p className="text-sm text-text-secondary">
+                    Te enviamos un enlace de confirmación. Una vez confirmado, podrás iniciar sesión.
+                </p>
+                <button
+                    onClick={onSuccess}
+                    className="mt-2 text-sm font-semibold text-primary hover:brightness-110 transition-all"
+                >
+                    Ir al inicio de sesión →
+                </button>
+            </div>
+        );
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-            <Field
-                label="Nombre completo"
-                id="register-name"
-                placeholder="Juan García"
-                error={errors.name?.message}
-                registration={register("name")}
-            />
             <Field
                 label="Email"
                 id="register-email"

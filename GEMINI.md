@@ -167,6 +167,16 @@ Para construir una nueva página:
 
 ---
 
+## SKILLS disponibles
+
+- .agents/skills/typescript/SKILL.md
+- .agents/skills/zod-4/SKILL.md
+- .agents/skills/next-15/SKILL.md
+- .agents/skills/zustand-5/SKILL.md
+- .agents/skills/tailwind-4/SKILL.md
+- .agents/skills/react-19/SKILL.md
+- .agents/skills/auth/SKILL.md
+
 ## Imágenes Permitidas
 
 Configuradas en `next.config.ts`:

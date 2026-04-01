@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/organisms/AuthForm";
 import type { Metadata } from "next";
@@ -10,9 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage() {
-    const session = await getServerSession(authOptions);
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
 
-    if (session) {
+    if (data.user) {
         redirect("/");
     }
 

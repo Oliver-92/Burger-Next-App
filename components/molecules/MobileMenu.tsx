@@ -2,13 +2,30 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/utils";
+import type { User } from "@supabase/supabase-js";
 
 export function MobileMenu() {
-    const { data: session } = useSession();
+    const [user, setUser] = useState<User | null>(null);
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        const supabase = createClient();
+
+        supabase.auth.getUser().then(({ data }) => {
+            setUser(data.user);
+        });
+
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, []);
 
     // Lock scroll when menu is open
     useEffect(() => {
@@ -24,6 +41,14 @@ export function MobileMenu() {
 
     const toggleMenu = () => setIsOpen(!isOpen);
     const closeMenu = () => setIsOpen(false);
+
+    async function handleSignOut() {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        closeMenu();
+        router.push("/");
+        router.refresh();
+    }
 
     return (
         <div className="md:hidden">
@@ -85,22 +110,18 @@ export function MobileMenu() {
                     </Link>
 
                     {/* Extra mobile-only action */}
-                    {session ? (
+                    {user ? (
                         <div className="flex flex-col items-center gap-6 mt-4">
                             <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-surface-dark border border-surface-border">
                                 <div className="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold">
-                                    {session.user?.name?.charAt(0).toUpperCase() ?? "U"}
+                                    {user.email?.charAt(0).toUpperCase() ?? "U"}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-white font-semibold text-sm">{session.user?.name}</span>
-                                    <span className="text-text-secondary text-xs">{session.user?.email}</span>
+                                    <span className="text-text-secondary text-xs">{user.email}</span>
                                 </div>
                             </div>
                             <button
-                                onClick={() => {
-                                    closeMenu();
-                                    signOut({ callbackUrl: "/" });
-                                }}
+                                onClick={handleSignOut}
                                 className="px-12 py-4 border-2 border-primary text-primary font-bold text-xl rounded-full transition-all hover:bg-primary hover:text-background-dark active:scale-95"
                             >
                                 Cerrar Sesión
