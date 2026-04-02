@@ -1,16 +1,42 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/lib/data";
+import { createClient } from "@/lib/supabase/server";
+import { mapBadge } from "@/lib/utils";
 
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     const { id } = await params;
-    const product = PRODUCTS.find((p) => p.id === id);
+    const supabase = await createClient();
 
-    if (!product) {
+    const { data: product, error } = await supabase
+        .from("products")
+        .select(`
+            *,
+            categories (
+                slug
+            ),
+            product_extras (
+                extras (*)
+            ),
+            product_removables (
+                removables (*)
+            )
+        `)
+        .eq("id", id)
+        .single();
+
+    if (error || !product) {
         return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
-    return NextResponse.json(product);
+    const mappedProduct = {
+        ...product,
+        category: product.categories?.slug || "all",
+        badge: mapBadge(product.badge),
+        extras: product.product_extras?.map((pe: any) => pe.extras).filter(Boolean) || [],
+        removables: product.product_removables?.map((pr: any) => pr.removables?.name).filter(Boolean) || [],
+    };
+
+    return NextResponse.json(mappedProduct);
 }

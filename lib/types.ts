@@ -7,7 +7,6 @@ export interface Product {
     category: MenuCategory;
     featured?: boolean;
     badge?: ProductBadge;
-    gallery?: string[];
     removables?: string[];
     extras?: Extra[];
 }
@@ -65,7 +64,7 @@ export interface AboutContent {
 }
 
 export interface CartItem {
-    id: string; // Unique ID (productId + customizations hash)
+    id: string;
     product: Product;
     quantity: number;
     selectedExtras: Extra[];
