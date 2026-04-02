@@ -57,12 +57,13 @@ export function NavActions() {
             {user ? (
                 <div className="hidden md:flex items-center gap-3">
                     {/* User avatar initials */}
-                    <div
-                        className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary"
+                    <Link
+                        href="/perfil"
+                        className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary hover:border-primary transition-colors cursor-pointer"
                         title={user.email ?? ""}
                     >
                         {user.email?.charAt(0).toUpperCase() ?? "U"}
-                    </div>
+                    </Link>
                     <button
                         onClick={handleSignOut}
                         className="text-sm font-semibold text-text-secondary hover:text-white transition-colors cursor-pointer"

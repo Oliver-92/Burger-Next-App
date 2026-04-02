@@ -64,7 +64,6 @@ export interface AboutContent {
     values: Value[];
 }
 
-
 export interface CartItem {
     id: string; // Unique ID (productId + customizations hash)
     product: Product;
@@ -86,6 +85,16 @@ export interface CartStore {
     totalPrice: number;
 }
 
+// ── User profile ─────────────────────────────────────────────────────────────
+export interface UserProfile {
+    id: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    age: number;
+    phone: string;
+    address: string;
+}
 
 const MENU_CATEGORY = {
     ALL: "all",
@@ -97,4 +106,3 @@ const MENU_CATEGORY = {
 
 export type MenuCategory = (typeof MENU_CATEGORY)[keyof typeof MENU_CATEGORY];
 export { MENU_CATEGORY };
-
