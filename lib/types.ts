@@ -93,6 +93,7 @@ export interface UserProfile {
     age: number;
     phone: string;
     address: string;
+    role: "admin" | "user";
 }
 
 const MENU_CATEGORY = {

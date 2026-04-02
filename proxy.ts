@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_ROUTES = ["/dashboard", "/perfil"];
+const PROTECTED_ROUTES = ["/dashboard", "/perfil", "/admin"];
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -34,13 +34,27 @@ export async function proxy(request: NextRequest) {
         }
     );
 
-    // Refresh the session — this will update cookies if the token was refreshed
-    const { data } = await supabase.auth.getUser();
+    // Refresh session and check authentication
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!data.user) {
+    if (!user) {
         const loginUrl = new URL("/login", request.url);
         loginUrl.searchParams.set("callbackUrl", pathname);
         return NextResponse.redirect(loginUrl);
+    }
+
+    // Role-based protection for /admin
+    if (pathname.startsWith("/admin")) {
+        const { data: profile } = await supabase
+            .from("users")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+
+        if (profile?.role !== "admin") {
+            const homeUrl = new URL("/", request.url);
+            return NextResponse.redirect(homeUrl);
+        }
     }
 
     return response;
