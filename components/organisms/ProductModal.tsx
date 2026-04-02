@@ -10,20 +10,22 @@ import { cn } from "@/lib/utils";
 interface ProductModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSave: (product: Product) => void;
+    onSave: (data: any) => void;
     product?: Product | null;
 }
 
-const INITIAL_STATE: Omit<Product, "id"> = {
+const INITIAL_STATE = {
     name: "",
     description: "",
-    price: 0,
+    price: 0 as number,
     image: "",
-    category: MENU_CATEGORY.SMASH,
+    category: MENU_CATEGORY.SMASH as MenuCategory,
+    featured: false,
+    badge: "",
 };
 
 export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalProps) {
-    const [formData, setFormData] = useState<Omit<Product, "id">>(INITIAL_STATE);
+    const [formData, setFormData] = useState(INITIAL_STATE);
 
     useEffect(() => {
         if (product) {
@@ -33,7 +35,8 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
                 price: product.price,
                 image: product.image,
                 category: product.category,
-                badge: product.badge,
+                featured: product.featured || false,
+                badge: product.badge?.label || "",
             });
         } else {
             setFormData(INITIAL_STATE);
@@ -42,11 +45,7 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSave({
-            ...formData,
-            id: product?.id || Math.random().toString(36).substr(2, 9),
-        } as Product);
-        onClose();
+        onSave(formData);
     };
 
     return (
@@ -65,7 +64,7 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-text-secondary/30"
                         placeholder="Ej: Triple Beast Burger"
                     />
                 </div>
@@ -77,7 +76,7 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
                         required
                         value={formData.description}
                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                        className="w-full h-24 p-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                        className="w-full h-24 p-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none placeholder:text-text-secondary/30"
                         placeholder="Describe los ingredientes y el sabor..."
                     />
                 </div>
@@ -99,17 +98,46 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
                     {/* Category */}
                     <div className="space-y-2">
                         <label className="text-xs font-black text-text-secondary uppercase tracking-wider">Categoría</label>
-                        <select
-                            value={formData.category}
-                            onChange={(e) => setFormData({ ...formData, category: e.target.value as MenuCategory })}
-                            className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer"
-                        >
-                            {Object.entries(MENU_CATEGORY).filter(([k]) => k !== "ALL").map(([key, value]) => (
-                                <option key={value} value={value} className="bg-surface-dark">
-                                    {key.replace("_", " ").toLowerCase()}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="relative">
+                            <select
+                                value={formData.category}
+                                onChange={(e) => setFormData({ ...formData, category: e.target.value as MenuCategory })}
+                                className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer"
+                            >
+                                {Object.entries(MENU_CATEGORY).filter(([k]) => k !== "ALL").map(([key, value]) => (
+                                    <option key={value} value={value} className="bg-surface-dark">
+                                        {key.replace("_", " ").toLowerCase()}
+                                    </option>
+                                ))}
+                            </select>
+                            <Icon name="expand_more" size="sm" className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Badge & Featured */}
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <label className="text-xs font-black text-text-secondary uppercase tracking-wider">Etiqueta (Badge)</label>
+                        <input
+                            type="text"
+                            value={formData.badge}
+                            onChange={(e) => setFormData({ ...formData, badge: e.target.value })}
+                            className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-text-secondary/30"
+                            placeholder="Ej: Nuevo, Spicy, Vegan..."
+                        />
+                    </div>
+                    <div className="flex items-center gap-3 pt-8">
+                        <label className="relative flex items-center cursor-pointer">
+                            <input 
+                                type="checkbox" 
+                                checked={formData.featured}
+                                onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                                className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-surface-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:inset-s-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            <span className="ms-3 text-xs font-black text-text-secondary uppercase tracking-wider">Destacado</span>
+                        </label>
                     </div>
                 </div>
 
@@ -121,7 +149,7 @@ export function ProductModal({ isOpen, onClose, onSave, product }: ProductModalP
                         type="url"
                         value={formData.image}
                         onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                        className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        className="w-full h-12 px-4 rounded-xl bg-background-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-text-secondary/30"
                         placeholder="https://..."
                     />
                 </div>

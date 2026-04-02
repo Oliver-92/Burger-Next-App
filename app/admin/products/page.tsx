@@ -8,12 +8,13 @@ import { Icon } from "@/components/atoms/Icon";
 import { Button } from "@/components/atoms/Button";
 import { MENU_CATEGORY } from "@/lib/types";
 import type { Product, MenuCategory } from "@/lib/types";
-import { getProducts } from "@/lib/services/products";
+import { getAdminProducts, deleteProduct, saveProduct } from "@/app/actions/products";
 import LoadingSpinner from "@/app/loading";
 
 export default function AdminProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     // Search & Filter State
     const [searchTerm, setSearchTerm] = useState("");
@@ -25,17 +26,19 @@ export default function AdminProductsPage() {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
+    const fetchProducts = async () => {
+        setIsLoading(true);
+        try {
+            const data = await getAdminProducts();
+            setProducts(data);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await getProducts();
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
         fetchProducts();
     }, []);
 
@@ -49,19 +52,40 @@ export default function AdminProductsPage() {
     }, [products, searchTerm, filterCategory]);
 
     // CRUD Handlers
-    const handleSave = (product: Product) => {
-        if (editingProduct) {
-            setProducts(products.map((p) => (p.id === product.id ? product : p)));
-        } else {
-            setProducts([product, ...products]);
+    const handleSave = async (data: any) => {
+        setIsSubmitting(true);
+        try {
+            const result = await saveProduct(data, editingProduct?.id);
+            if (result.success) {
+                await fetchProducts(); // Refresh list
+                setIsProductModalOpen(false);
+            } else {
+                alert(result.error || "Ocurrió un error al guardar.");
+            }
+        } catch (error) {
+            console.error("Error saving product:", error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
-    const handleDelete = () => {
-        if (productToDelete) {
-            setProducts(products.filter((p) => p.id !== productToDelete.id));
-            setIsDeleteModalOpen(false);
-            setProductToDelete(null);
+    const handleDeleteProduct = async () => {
+        if (!productToDelete) return;
+        
+        setIsSubmitting(true);
+        try {
+            const result = await deleteProduct(productToDelete.id);
+            if (result.success) {
+                setProducts(products.filter((p) => p.id !== productToDelete.id));
+                setIsDeleteModalOpen(false);
+                setProductToDelete(null);
+            } else {
+                alert(result.error || "Ocurrió un error al eliminar.");
+            }
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -90,7 +114,7 @@ export default function AdminProductsPage() {
                         <span className="text-xs font-black uppercase tracking-[0.2em]">Panel de Control</span>
                     </div>
                     <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter font-display leading-none">
-                        Administración
+                        Catálogo de Productos
                     </h1>
                 </div>
 
@@ -103,7 +127,7 @@ export default function AdminProductsPage() {
                                 <Icon name="search" size="sm" className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" />
                                 <input 
                                     type="text"
-                                    placeholder="Buscar productos..."
+                                    placeholder="Buscar por nombre..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     className="w-full h-12 pl-12 pr-4 rounded-xl bg-surface-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -129,14 +153,14 @@ export default function AdminProductsPage() {
                             className="w-full md:w-auto px-8"
                         >
                             <Icon name="add" size="sm" />
-                            Nuevo Producto
+                            Agregar Producto
                         </Button>
                     </div>
 
                     {/* Content Table */}
                     {isLoading ? (
                         <div className="py-20">
-                            <LoadingSpinner message="Cargando catálogo..." />
+                            <LoadingSpinner message="Sincronizando con base de datos..." />
                         </div>
                     ) : (
                         <AdminTable 
@@ -164,20 +188,22 @@ export default function AdminProductsPage() {
             >
                 <div className="space-y-6">
                     <p className="text-text-secondary">
-                        Esta acción no se puede deshacer. El producto <span className="text-white font-bold inline">"{productToDelete?.name}"</span> será eliminado del catálogo.
+                        Esta acción no se puede deshacer. El producto <span className="text-white font-bold inline">"{productToDelete?.name}"</span> será eliminado permanentemente de la base de datos.
                     </p>
                     <div className="flex gap-3">
                         <button 
+                            disabled={isSubmitting}
                             onClick={() => setIsDeleteModalOpen(false)}
-                            className="flex-1 h-12 rounded-xl border border-surface-border text-white font-bold hover:bg-white/5 transition-all cursor-pointer"
+                            className="flex-1 h-12 rounded-xl border border-surface-border text-white font-bold hover:bg-white/5 transition-all cursor-pointer disabled:opacity-50"
                         >
                             Cancelar
                         </button>
                         <button 
-                            onClick={handleDelete}
-                            className="flex-1 h-12 rounded-xl bg-red-500 text-white font-black uppercase tracking-tight hover:bg-red-600 transition-all cursor-pointer"
+                            disabled={isSubmitting}
+                            onClick={handleDeleteProduct}
+                            className="flex-1 h-12 rounded-xl bg-red-500 text-white font-black uppercase tracking-tight hover:bg-red-600 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center"
                         >
-                            Eliminar
+                            {isSubmitting ? <LoadingSpinner message="" /> : "Eliminar"}
                         </button>
                     </div>
                 </div>
