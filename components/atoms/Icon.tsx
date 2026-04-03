@@ -54,6 +54,9 @@ export function Icon({ name, className, size = "md", fill = "transparent" }: Ico
         add_circle_outline: "PlusCircle",
         check: "Check",
         logout: "LogOut",
+        inventory_2: "Package",
+        group: "Users",
+        refresh: "RefreshCw",
     };
 
     const lucideName = (iconMap[name] ||

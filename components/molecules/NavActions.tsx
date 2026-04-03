@@ -11,6 +11,7 @@ import type { User } from "@supabase/supabase-js";
 
 export function NavActions() {
     const [user, setUser] = useState<User | null>(null);
+    const [role, setRole] = useState<"admin" | "user" | null>(null);
     const router = useRouter();
     const totalItems = useCartStore((state) => state.totalItems);
     const hydrated = useHydrated();
@@ -18,12 +19,30 @@ export function NavActions() {
     useEffect(() => {
         const supabase = createClient();
 
+        async function fetchRole(userId: string) {
+            const { data, error } = await supabase
+                .from("users")
+                .select("role")
+                .eq("id", userId)
+                .single();
+            if (!error && data) {
+                setRole(data.role as "admin" | "user");
+            }
+        }
+
         supabase.auth.getUser().then(({ data }) => {
             setUser(data.user);
+            if (data.user) fetchRole(data.user.id);
         });
 
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null);
+            const newUser = session?.user ?? null;
+            setUser(newUser);
+            if (newUser) {
+                fetchRole(newUser.id);
+            } else {
+                setRole(null);
+            }
         });
 
         return () => listener.subscription.unsubscribe();
@@ -58,7 +77,7 @@ export function NavActions() {
                 <div className="hidden md:flex items-center gap-3">
                     {/* User avatar initials */}
                     <Link
-                        href="/perfil"
+                        href={role === "admin" ? "/admin" : "/perfil"}
                         className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary hover:border-primary transition-colors cursor-pointer"
                         title={user.email ?? ""}
                     >
