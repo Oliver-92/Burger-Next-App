@@ -80,8 +80,11 @@ export interface CartStore {
     removeItem: (id: string) => void;
     updateQuantity: (id: string, quantity: number) => void;
     clearCart: () => void;
+    setItems: (items: CartItem[]) => void;
     totalItems: number;
     totalPrice: number;
+    isSyncing: boolean;
+    setIsSyncing: (isSyncing: boolean) => void;
 }
 
 // ── User profile ─────────────────────────────────────────────────────────────

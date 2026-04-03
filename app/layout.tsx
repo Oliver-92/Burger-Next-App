@@ -6,6 +6,7 @@ import { Footer } from "@/components/organisms/Footer";
 import { FloatingCart } from "@/components/organisms/FloatingCart";
 import { CartSheet } from "@/components/organisms/CartSheet";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { CartSync } from "@/components/molecules/CartSync";
 
 const splineSans = Spline_Sans({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${splineSans.variable} font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-background-dark`}
       >
         <AuthProvider>
+          <CartSync />
           <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             <Navbar />
             <div className="flex-1 flex flex-col">

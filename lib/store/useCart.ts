@@ -4,7 +4,7 @@ import { immer } from "zustand/middleware/immer";
 import type { CartItem, CartStore } from "@/lib/types";
 
 // Helper to generate a unique ID based on product ID and its customizations
-const generateUniqueId = (item: Omit<CartItem, "id">) => {
+export const generateUniqueId = (item: Omit<CartItem, "id">) => {
     const extrasIds = item.selectedExtras
         .map((e) => e.id)
         .sort()
@@ -75,6 +75,20 @@ export const useCartStore = create<CartStore>()(
                     set((state) => {
                         state.items = [];
                         updateTotals(state);
+                    });
+                },
+
+                setItems: (items) => {
+                    set((state) => {
+                        state.items = items;
+                        updateTotals(state);
+                    });
+                },
+
+                isSyncing: false,
+                setIsSyncing: (isSyncing) => {
+                    set((state) => {
+                        state.isSyncing = isSyncing;
                     });
                 },
             };
