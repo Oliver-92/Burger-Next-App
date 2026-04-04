@@ -6,7 +6,7 @@ import { Icon } from "@/components/atoms/Icon";
 import { Button } from "@/components/atoms/Button";
 import { getUsers } from "@/app/actions/admin";
 import type { UserProfile } from "@/lib/types";
-import LoadingSpinner from "@/app/loading";
+import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
 import Link from "next/link";
 
 export default function AdminUsersPage() {

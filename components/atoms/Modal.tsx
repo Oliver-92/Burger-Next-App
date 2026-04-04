@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Icon } from "@/components/atoms/Icon";
+import { Button } from "@/components/atoms/Button";
 import { cn } from "@/lib/utils";
 
 interface ModalProps {
@@ -56,12 +57,13 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
                     <h3 className="text-xl font-bold text-white uppercase tracking-tight font-display">
                         {title}
                     </h3>
-                    <button 
+                    <Button 
+                        variant="icon"
                         onClick={onClose}
-                        className="size-10 rounded-full flex items-center justify-center text-text-secondary hover:text-white hover:bg-surface-border transition-all cursor-pointer"
+                        className="size-10 rounded-full text-text-secondary hover:text-white hover:bg-surface-border transition-all cursor-pointer"
                     >
                         <Icon name="close" size="md" />
-                    </button>
+                    </Button>
                 </div>
 
                 {/* Body */}

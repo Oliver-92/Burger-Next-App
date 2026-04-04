@@ -7,9 +7,9 @@ import { Modal } from "@/components/atoms/Modal";
 import { Icon } from "@/components/atoms/Icon";
 import { Button } from "@/components/atoms/Button";
 import { MENU_CATEGORY } from "@/lib/types";
-import type { Product, MenuCategory } from "@/lib/types";
+import type { Product, MenuCategory, ProductSaveInput } from "@/lib/types";
 import { getAdminProducts, deleteProduct, saveProduct } from "@/app/actions/products";
-import LoadingSpinner from "@/app/loading";
+import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
 import Link from "next/link";
 
 export default function AdminProductsPage() {
@@ -26,6 +26,7 @@ export default function AdminProductsPage() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+    const [formErrors, setFormErrors] = useState<Record<string, string[]>>({});
 
     const fetchProducts = async () => {
         setIsLoading(true);
@@ -53,15 +54,20 @@ export default function AdminProductsPage() {
     }, [products, searchTerm, filterCategory]);
 
     // CRUD Handlers
-    const handleSave = async (data: any) => {
+    const handleSave = async (data: ProductSaveInput) => {
         setIsSubmitting(true);
         try {
             const result = await saveProduct(data, editingProduct?.id);
             if (result.success) {
                 await fetchProducts(); // Refresh list
                 setIsProductModalOpen(false);
+                setFormErrors({});
             } else {
-                alert(result.error || "Ocurrió un error al guardar.");
+                if (result.details) {
+                    setFormErrors(result.details as Record<string, string[]>);
+                } else {
+                    alert(result.error || "Ocurrió un error al guardar.");
+                }
             }
         } catch (error) {
             console.error("Error saving product:", error);
@@ -92,11 +98,13 @@ export default function AdminProductsPage() {
 
     const openEditModal = (product: Product) => {
         setEditingProduct(product);
+        setFormErrors({});
         setIsProductModalOpen(true);
     };
 
     const openCreateModal = () => {
         setEditingProduct(null);
+        setFormErrors({});
         setIsProductModalOpen(true);
     };
 
@@ -111,7 +119,7 @@ export default function AdminProductsPage() {
                 {/* Admin Header */}
                 <div className="mb-10 flex flex-col gap-2">
                     <Link href="/admin" className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest">
-                        <Icon name="arrow_back" size="sm" /> Volver al Dashboard
+                        <Icon name="arrow_left" size="sm" /> Volver al Dashboard
                     </Link>
                     <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter font-display leading-none">
                         Catálogo de Productos
@@ -152,7 +160,7 @@ export default function AdminProductsPage() {
                             onClick={openCreateModal}
                             className="w-full md:w-auto px-8"
                         >
-                            <Icon name="add" size="sm" />
+                            <Icon name="plus" size="sm" />
                             Agregar Producto
                         </Button>
                     </div>
@@ -178,6 +186,8 @@ export default function AdminProductsPage() {
                 onClose={() => setIsProductModalOpen(false)}
                 onSave={handleSave}
                 product={editingProduct}
+                errors={formErrors}
+                isSubmitting={isSubmitting}
             />
 
             <Modal
@@ -191,23 +201,25 @@ export default function AdminProductsPage() {
                         Esta acción no se puede deshacer. El producto <span className="text-white font-bold inline">"{productToDelete?.name}"</span> será eliminado permanentemente de la base de datos.
                     </p>
                     <div className="flex gap-3">
-                        <button
+                        <Button
                             disabled={isSubmitting}
                             onClick={() => setIsDeleteModalOpen(false)}
-                            className="flex-1 h-12 rounded-xl border border-surface-border text-white font-bold hover:bg-white/5 transition-all cursor-pointer disabled:opacity-50"
+                            variant="secondary"
+                            className="flex-1 h-12 rounded-xl"
                         >
                             Cancelar
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             disabled={isSubmitting}
                             onClick={handleDeleteProduct}
-                            className="flex-1 h-12 rounded-xl bg-red-500 text-white font-black uppercase tracking-tight hover:bg-red-600 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center"
+                            className="flex-1 h-12 rounded-xl bg-red-500 hover:bg-red-600 text-white shadow-none"
                         >
-                            {isSubmitting ? <LoadingSpinner message="" /> : "Eliminar"}
-                        </button>
+                            {isSubmitting ? <LoadingSpinner message="" className="w-5 h-5" /> : "Eliminar"}
+                        </Button>
                     </div>
                 </div>
             </Modal>
+
         </div>
     );
 }

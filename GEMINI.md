@@ -13,7 +13,7 @@
 | Estilos | Tailwind CSS 4 |
 | Lenguaje | TypeScript 5 (strict) |
 | Fonts | Spline Sans (Google Fonts) |
-| Iconos | Material Symbols Outlined |
+| Iconos | Lucide React (vía átomo Icon) |
 
 ---
 
@@ -21,48 +21,55 @@
 
 ```
 app/
-├── api/
-│   ├── menu/route.ts         # GET /api/menu [NEW]
-│   └── products/route.ts     # GET /api/products
+├── actions/                  # Next.js Server Actions (Reemplaza API Routes)
+│   ├── products.ts           # CRUD de productos
+│   ├── cart.ts               # Lógica de sincronización de carrito
+│   └── profile.ts            # Gestión de perfil de usuario
 ├── menu/
-│   └── page.tsx              # Menu page (Server Component) [NEW]
+│   └── page.tsx              # Página de menú (Server Component)
+├── admin/                    # Panel de administración
+│   ├── products/page.tsx     # Gestión de catálogo
+│   └── users/page.tsx        # Gestión de usuarios
 ├── globals.css               # Design tokens (@theme) + utilidades globales
 ├── layout.tsx                # Root layout: fuente, dark mode, metadata
-└── page.tsx                  # Home page (Server Component con fetch)
+└── page.tsx                  # Home page (Server Component)
 
 components/
 ├── atoms/                    # Elementos mínimos, sin dependencias internas
-│   ├── Badge.tsx             # Etiquetas: primary | dark | green
-│   ├── Button.tsx            # Botones: primary | secondary | ghost | icon
-│   └── Icon.tsx              # Wrapper de Material Symbols
+│   ├── Badge.tsx             # Etiquetas con variantes (primary, dark, vegan, etc.)
+│   ├── Button.tsx            # Átomo central de botones (primary, secondary, etc.)
+│   ├── Icon.tsx              # Wrapper de Lucide React con mapeo dinámico
+│   ├── LoadingSpinner.tsx    # Spinner animado premium [NEW]
+│   └── Modal.tsx             # Base para ventanas modales
 ├── molecules/                # Combinaciones de atoms
+│   ├── AdminTable.tsx        # Tabla de gestión de datos [NEW]
+│   ├── CartSync.tsx          # Sincronización de estado local/DB [NEW]
 │   ├── CustomerAvatars.tsx   # Avatars apilados + rating
-│   ├── FeatureCard.tsx       # Tarjeta de característica (icono + texto)
-│   ├── FilterChip.tsx        # Pill de filtro de categoría [NEW]
-│   ├── MenuCard.tsx          # Tarjeta de producto de menú completa [NEW]
-│   ├── NavActions.tsx        # Acciones del navbar (search, cart, login)
-│   ├── NavLogo.tsx           # Logo + nombre de marca
-│   └── ProductCard.tsx       # Tarjeta de producto (imagen, precio, botón)
+│   ├── FeatureCard.tsx       # Tarjeta de característica
+│   ├── FilterChip.tsx        # Pill de filtro de categoría
+│   ├── OrderSummary.tsx      # Resumen de totales en checkout [NEW]
+│   └── ProductCard.tsx       # Tarjeta de producto (Unificada Home/Menú) [REF]
 └── organisms/                # Secciones completas de UI
+    ├── AuthForm.tsx          # Formulario de Login/Registro [NEW]
+    ├── CartSheet.tsx         # Panel lateral de carrito (Drawer) [NEW]
     ├── FeaturesSection.tsx   # Sección "Calidad Artesanal"
-    ├── FilterBar.tsx         # Barra de filtros horizontal (Client) [NEW]
-    ├── FloatingCart.tsx      # Carrito flotante responsive (Client) [NEW]
+    ├── FilterBar.tsx         # Barra de filtros horizontal (Client)
+    ├── FloatingCart.tsx      # Botón flotante de acceso al carrito
     ├── Footer.tsx            # Pie de página
-    ├── HeroSection.tsx       # Hero principal con imagen y CTAs
-    ├── MenuGrid.tsx          # Grid de productos con filtrado (Client) [NEW]
-    ├── MenuHeroBanner.tsx    # Banner superior del menú [NEW]
-    ├── Navbar.tsx            # Cabecera sticky con nav links
-    └── PopularSection.tsx    # Carousel "Populares esta semana" (Client)
+    ├── HeroSection.tsx       # Hero principal
+    ├── MenuGrid.tsx          # Grid de productos con filtrado (Client)
+    ├── Navbar.tsx            # Cabecera sticky con navegación y auth
+    ├── PopularSection.tsx    # Carousel "Populares esta semana"
+    └── ProductModal.tsx      # Modal de edición de producto para Admin [NEW]
 
 lib/
-├── data/
-│   ├── home.ts              # Datos estáticos: products, features, avatars
-│   └── menu.ts              # Datos estáticos: menuItems, heroBannerImage [NEW]
+├── store/
+│   └── useCart.ts           # Estado global del carrito (Zustand)
 ├── services/
-│   ├── menu.ts              # Fetch desde /api/menu (ISR 1h) [NEW]
-│   └── products.ts          # Fetch desde /api/products (ISR 1h)
-├── types.ts                 # Interfaces: Product, MenuItem, etc.
-└── utils.ts                 # cn() = clsx + tailwind-merge
+│   ├── products.ts          # Acceso a datos vía Supabase
+│   └── user.ts              # Servicios de perfil y auth
+├── types.ts                 # Interfaces: Product, CartItem, UserProfile, etc.
+└── utils.ts                 # cn() y formateadores
 ```
 
 ---
@@ -91,10 +98,10 @@ Definidos con `@theme` de Tailwind 4 — se usan como clases normales:
 atoms → molecules → organisms → page
 ```
 
-- **Atoms**: sin lógica, sin estado, sólo presentación pura (`Badge`, `Button`, `Icon`)
-- **Molecules**: combinan átomos con una función específica (`ProductCard`, `NavLogo`, …)
-- **Organisms**: secciones completas que componen moléculas y átomos (`Navbar`, `HeroSection`, …)
-- **Page**: Server Component que hace fetch y pasa datos a organisms
+- **Atoms**: sin lógica de negocio, sin dependencias internas (`Badge`, `Button`, `Icon`, `LoadingSpinner`)
+- **Molecules**: combinan átomos para una función específica (`AdminTable`, `ProductCard`)
+- **Organisms**: secciones complejas, a menudo conectadas a acciones o estado global (`Navbar`, `CartSheet`)
+- **Page**: Server Component que orquestra la carga inicial de datos.
 
 ### Regla de dependencias
 Los átomos **no** importan moléculas ni organismos. Las moléculas **no** importan organismos.
@@ -103,67 +110,33 @@ Los átomos **no** importan moléculas ni organismos. Las moléculas **no** impo
 
 ## Convenciones TypeScript
 
-- Interfaces **planas** (máximo 1 nivel de anidación; objetos anidados → interfaz separada)
-- **Const types** para uniones: `const VARIANT = { A: "a" } as const`
-- Nunca `any` — usar `unknown` o genéricos
-- Exports con nombre (`export function`) para componentes — nunca export default en componentes
+- Interfaces **planas** (objetos anidados → interfaz separada).
+- **Enums/Const types** para variantes: `const VARIANT = { ... } as const`.
+- **Prohibido el uso de `any`**. Usar tipos específicos o genéricos si es necesario.
+- Exports con nombre (`export function Name`) para facilitar el autocompletado y refactor.
 
 ---
 
 ## Patrones de Datos
 
-### Flujo de datos para productos
+### Flujo de datos Moderno
 ```
-lib/data/home.ts  →  app/api/products/route.ts  →  lib/services/products.ts  →  app/page.tsx
-(datos estáticos)      (GET /api/products)           (fetch con ISR 1h)           (Server Component)
+lib/services/products.ts  →  app/actions/products.ts  →  Componente (Server/Client)
+(Acceso directo DB)          (Validación + Mutación)       (Renderizado/Invocación)
 ```
-
-### Agregar nuevos datos
-1. Agregar el tipo en `lib/types.ts`
-2. Agregar los datos en `lib/data/home.ts` (o crear nuevo archivo en `lib/data/`)
-3. Crear la ruta API en `app/api/<recurso>/route.ts`
-4. Crear el service en `lib/services/<recurso>.ts`
-5. Consumir en el Server Component correspondiente
 
 ---
 
 ## Convenciones de Componentes
 
 ### Server vs Client Components
-- Por defecto: **Server Component** (sin `"use client"`)
-- Usar `"use client"` solo cuando se necesita: estado, efectos, eventos DOM
-- Actualmente: `NavActions.tsx` y `PopularSection.tsx` son Client Components
+- Por defecto: **Server Component**.
+- Usar `"use client"` solo para: hooks de estado/efecto, eventos del DOM, Framer Motion.
+- Mantener los Client Components lo más pequeños posible (hoisting).
 
-### Images
-- Siempre usar `<Image>` de `next/image`
-- Configurar dominios externos en `next.config.ts` → `images.remotePatterns`
-- Imágenes en una cuadrícula: usar `fill` + `sizes` + `relative` en el contenedor
-
-### Responsive
-- Mobile-first con breakpoints: `md:` (768px) y `lg:` (1024px)
-- Layout principal: `px-4 md:px-10 lg:px-40`
-- Máximo ancho de contenido: `max-w-7xl mx-auto`
-
----
-
-## Próximas Páginas — Guía Rápida
-
-Para construir una nueva página:
-
-1. **Reutilizar** `Navbar` y `Footer` — ya son organismos standalone
-2. **Crear** nuevos organismos en `components/organisms/`
-3. **Reutilizar** átomos existentes, crear nuevos en `components/atoms/` si hace falta
-4. **Datos**: seguir el patrón `data → api → service → page`
-5. **Ruta**: crear `app/<ruta>/page.tsx` como Server Component
-
-### Componentes disponibles para reusar
-- `Navbar` — header sticky con dark mode
-- `Footer` — pie de página
-- `Badge` — etiquetas con variantes
-- `Button` — 4 variantes de botón
-- `Icon` — cualquier Material Symbol
-- `FeatureCard` — tarjeta con icono + título + descripción
-- `ProductCard` — tarjeta de producto completa
+### Buttons & Icons
+- Usar siempre el átomo `Button` para cualquier interacción clicable.
+- Los iconos deben consumirse mediante `Icon`, usando los nombres de Lucide.
 
 ---
 
@@ -181,5 +154,3 @@ Para construir una nueva página:
 
 Configuradas en `next.config.ts`:
 - `lh3.googleusercontent.com/aida-public/**` (imágenes del diseño)
-
-Para agregar más dominios, editar `images.remotePatterns` en `next.config.ts`.

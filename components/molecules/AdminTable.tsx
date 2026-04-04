@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Icon } from "@/components/atoms/Icon";
+import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
 import type { Product } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -55,20 +56,22 @@ export function AdminTable({ products, onEdit, onDelete }: AdminTableProps) {
                             </td>
                             <td className="px-6 py-4">
                                 <div className="flex items-center justify-center gap-2">
-                                    <button 
+                                    <Button 
+                                        variant="icon"
                                         onClick={() => onEdit(product)}
-                                        className="size-9 rounded-lg flex items-center justify-center bg-surface-border/30 text-text-secondary hover:text-white hover:bg-blue-500/20 transition-all cursor-pointer border border-transparent hover:border-blue-500/30"
+                                        className="size-9 bg-surface-border/30 text-text-secondary hover:text-white hover:bg-blue-500/20 border-transparent hover:border-blue-500/30"
                                         title="Editar"
                                     >
                                         <Icon name="edit" size="sm" />
-                                    </button>
-                                    <button 
+                                    </Button>
+                                    <Button 
+                                        variant="icon"
                                         onClick={() => onDelete(product)}
-                                        className="size-9 rounded-lg flex items-center justify-center bg-surface-border/30 text-text-secondary hover:text-white hover:bg-red-500/20 transition-all cursor-pointer border border-transparent hover:border-red-500/30"
+                                        className="size-9 bg-surface-border/30 text-text-secondary hover:text-white hover:bg-red-500/20 border-transparent hover:border-red-500/30"
                                         title="Eliminar"
                                     >
-                                        <Icon name="delete" size="sm" />
-                                    </button>
+                                        <Icon name="trash_2" size="sm" />
+                                    </Button>
                                 </div>
                             </td>
                         </tr>

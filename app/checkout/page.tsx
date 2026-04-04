@@ -30,7 +30,7 @@ export default function CheckoutPage() {
         const checkAuthAndProfile = async () => {
             const supabase = createClient();
             const { data: { user } } = await supabase.auth.getUser();
-            
+
             if (!user) {
                 router.push("/login?redirect=/checkout");
                 return;
@@ -99,7 +99,7 @@ export default function CheckoutPage() {
     return (
         <main className="min-h-screen bg-background-dark pt-32 pb-24">
             <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-40">
-                
+
                 {/* Flow Title */}
                 <div className="mb-12">
                     <div className="flex items-center gap-2 text-primary mb-4">
@@ -109,7 +109,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                    
+
                     {/* Left Side: Form or Status */}
                     <div className="lg:col-span-7">
                         {(status === "idle" || status === "processing" && !error) ? (
@@ -117,12 +117,12 @@ export default function CheckoutPage() {
                                 <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 leading-none">
                                     Checkout
                                 </h1>
-                                <CheckoutForm 
-                                    onSubmit={handleCheckout} 
-                                    isLoading={status === "processing"} 
+                                <CheckoutForm
+                                    onSubmit={handleCheckout}
+                                    isLoading={status === "processing"}
                                     initialData={profile}
                                 />
-                                
+
                                 {status === "processing" && (
                                     <div className="absolute inset-0 bg-background-dark/80 backdrop-blur-sm flex flex-col items-center justify-center z-50 p-10 text-center animate-in fade-in duration-500">
                                         <div className="size-20 border-4 border-primary border-t-transparent rounded-full animate-spin mb-8" />
@@ -156,7 +156,7 @@ export default function CheckoutPage() {
 }
 
 function PaymentStatusView({ status, error, orderId }: { status: OrderStatus | "idle", error: string | null, orderId: string | null }) {
-    
+
     if (status === "paid") {
         return (
             <div className="p-12 rounded-3xl bg-primary/5 border-2 border-primary flex flex-col items-center text-center gap-6 animate-in zoom-in-95 duration-500">
@@ -171,8 +171,8 @@ function PaymentStatusView({ status, error, orderId }: { status: OrderStatus | "
                     <span className="text-xs font-bold text-text-secondary uppercase">ID de Orden</span>
                     <span className="text-sm font-mono text-primary">{orderId?.split("-")[0]}...</span>
                 </div>
-                <Link href="/perfil">
-                    <Button variant="primary" className="h-14 px-10 uppercase tracking-widest font-black italic">Ver mis pedidos</Button>
+                <Link href="/menu">
+                    <Button variant="primary" className="h-14 px-10 uppercase tracking-widest font-black italic">Seguir comprando</Button>
                 </Link>
             </div>
         );
@@ -188,9 +188,9 @@ function PaymentStatusView({ status, error, orderId }: { status: OrderStatus | "
                     <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-2 italic">Pago Fallido</h2>
                     <p className="text-red-400 font-medium">{error || "Hubo un error al procesar tu tarjeta. Por favor intenta de nuevo."}</p>
                 </div>
-                <Button 
+                <Button
                     onClick={() => window.location.reload()}
-                    variant="secondary" 
+                    variant="secondary"
                     className="h-14 px-10 uppercase tracking-widest font-black italic"
                 >
                     Reintentar Pago

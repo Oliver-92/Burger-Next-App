@@ -53,7 +53,7 @@ export function PopularSection({ products }: PopularSectionProps) {
                     className="flex overflow-x-auto gap-6 pb-8 hide-scrollbar snap-x snap-mandatory"
                 >
                     {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} isCarouselItem={true} />
                     ))}
                 </div>
             </div>
