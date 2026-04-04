@@ -13,6 +13,7 @@ export function LocationCard({ location }: LocationCardProps) {
                 <Image
                     src={location.image}
                     alt={location.name}
+                    loading="eager"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -23,22 +24,22 @@ export function LocationCard({ location }: LocationCardProps) {
                 <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-4 group-hover:text-primary transition-colors">
                     {location.name}
                 </h3>
-                
+
                 <div className="space-y-3 mb-6 flex-1">
                     <div className="flex items-start gap-3">
-                        <Icon name="MapPin" className="text-primary mt-0.5 shrink-0" size="sm" />
+                        <Icon name="Map-pin" className="text-primary mt-0.5 shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary">
                             {location.address}
                         </span>
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                         <Icon name="Phone" className="text-primary shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary">
                             {location.phone}
                         </span>
                     </div>
-                    
+
                     <div className="flex items-start gap-3">
                         <Icon name="Clock" className="text-primary mt-0.5 shrink-0" size="sm" />
                         <span className="text-sm text-slate-600 dark:text-text-secondary leading-tight">
@@ -47,10 +48,8 @@ export function LocationCard({ location }: LocationCardProps) {
                     </div>
                 </div>
 
-                <a 
+                <a
                     href={location.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="w-full h-11 rounded-xl bg-primary text-background-dark font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
                     <Icon name="Map" size="sm" />

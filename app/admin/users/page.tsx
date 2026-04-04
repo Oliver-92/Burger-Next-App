@@ -7,6 +7,7 @@ import { Button } from "@/components/atoms/Button";
 import { getUsers } from "@/app/actions/admin";
 import type { UserProfile } from "@/lib/types";
 import LoadingSpinner from "@/app/loading";
+import Link from "next/link";
 
 export default function AdminUsersPage() {
     const [users, setUsers] = useState<UserProfile[]>([]);
@@ -49,10 +50,9 @@ export default function AdminUsersPage() {
             <div className="max-w-7xl mx-auto w-full px-4 md:px-10 lg:px-40">
                 {/* Admin Header */}
                 <div className="mb-10 flex flex-col gap-2">
-                    <div className="flex items-center gap-2 text-primary">
-                        <Icon name="group" size="sm" className="text-primary" />
-                        <span className="text-xs font-black uppercase tracking-[0.2em]">Gestión de Comunidad</span>
-                    </div>
+                    <Link href="/admin" className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest">
+                        <Icon name="arrow_back" size="sm" /> Volver al Dashboard
+                    </Link>
                     <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter font-display leading-none">
                         Lista de Usuarios
                     </h1>

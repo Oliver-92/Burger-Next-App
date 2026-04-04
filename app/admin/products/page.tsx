@@ -10,12 +10,13 @@ import { MENU_CATEGORY } from "@/lib/types";
 import type { Product, MenuCategory } from "@/lib/types";
 import { getAdminProducts, deleteProduct, saveProduct } from "@/app/actions/products";
 import LoadingSpinner from "@/app/loading";
+import Link from "next/link";
 
 export default function AdminProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    
+
     // Search & Filter State
     const [searchTerm, setSearchTerm] = useState("");
     const [filterCategory, setFilterCategory] = useState<MenuCategory | "all">("all");
@@ -71,7 +72,7 @@ export default function AdminProductsPage() {
 
     const handleDeleteProduct = async () => {
         if (!productToDelete) return;
-        
+
         setIsSubmitting(true);
         try {
             const result = await deleteProduct(productToDelete.id);
@@ -109,10 +110,9 @@ export default function AdminProductsPage() {
             <div className="max-w-7xl mx-auto w-full px-4 md:px-10 lg:px-40">
                 {/* Admin Header */}
                 <div className="mb-10 flex flex-col gap-2">
-                    <div className="flex items-center gap-2 text-primary">
-                        <div className="size-2 rounded-full bg-primary animate-pulse" />
-                        <span className="text-xs font-black uppercase tracking-[0.2em]">Panel de Control</span>
-                    </div>
+                    <Link href="/admin" className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest">
+                        <Icon name="arrow_back" size="sm" /> Volver al Dashboard
+                    </Link>
                     <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter font-display leading-none">
                         Catálogo de Productos
                     </h1>
@@ -125,7 +125,7 @@ export default function AdminProductsPage() {
                             {/* Search */}
                             <div className="relative flex-1">
                                 <Icon name="search" size="sm" className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" />
-                                <input 
+                                <input
                                     type="text"
                                     placeholder="Buscar por nombre..."
                                     value={searchTerm}
@@ -134,7 +134,7 @@ export default function AdminProductsPage() {
                                 />
                             </div>
                             {/* Category Filter */}
-                            <select 
+                            <select
                                 value={filterCategory}
                                 onChange={(e) => setFilterCategory(e.target.value as MenuCategory | "all")}
                                 className="h-12 px-4 rounded-xl bg-surface-dark border border-surface-border text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer min-w-[150px]"
@@ -147,8 +147,8 @@ export default function AdminProductsPage() {
                                 ))}
                             </select>
                         </div>
-                        
-                        <Button 
+
+                        <Button
                             onClick={openCreateModal}
                             className="w-full md:w-auto px-8"
                         >
@@ -163,8 +163,8 @@ export default function AdminProductsPage() {
                             <LoadingSpinner message="Sincronizando con base de datos..." />
                         </div>
                     ) : (
-                        <AdminTable 
-                            products={filteredProducts} 
+                        <AdminTable
+                            products={filteredProducts}
                             onEdit={openEditModal}
                             onDelete={openDeleteModal}
                         />
@@ -173,7 +173,7 @@ export default function AdminProductsPage() {
             </div>
 
             {/* Modals outside constrained container to avoid z-index issues if any */}
-            <ProductModal 
+            <ProductModal
                 isOpen={isProductModalOpen}
                 onClose={() => setIsProductModalOpen(false)}
                 onSave={handleSave}
@@ -191,14 +191,14 @@ export default function AdminProductsPage() {
                         Esta acción no se puede deshacer. El producto <span className="text-white font-bold inline">"{productToDelete?.name}"</span> será eliminado permanentemente de la base de datos.
                     </p>
                     <div className="flex gap-3">
-                        <button 
+                        <button
                             disabled={isSubmitting}
                             onClick={() => setIsDeleteModalOpen(false)}
                             className="flex-1 h-12 rounded-xl border border-surface-border text-white font-bold hover:bg-white/5 transition-all cursor-pointer disabled:opacity-50"
                         >
                             Cancelar
                         </button>
-                        <button 
+                        <button
                             disabled={isSubmitting}
                             onClick={handleDeleteProduct}
                             className="flex-1 h-12 rounded-xl bg-red-500 text-white font-black uppercase tracking-tight hover:bg-red-600 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center"

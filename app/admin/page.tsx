@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Icon } from "@/components/atoms/Icon";
+import { getDashboardStats } from "@/app/actions/admin";
 
 const ADMIN_LINKS = [
+    {
+        title: "Pedidos",
+        description: "Revisa el historial, estados y detalles de ventas.",
+        href: "/admin/orders",
+        icon: "order_approve",
+        color: "text-amber-400",
+        bgColor: "bg-amber-400/10",
+    },
     {
         title: "Productos",
         description: "Gestiona el catálogo, precios y categorías.",
@@ -20,7 +29,16 @@ const ADMIN_LINKS = [
     },
 ];
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+    const stats = await getDashboardStats();
+
+    const metrics = [
+        { label: "Ventas Totales", value: `$${stats.totalRevenue.toFixed(0)}`, icon: "payments", color: "text-primary" },
+        { label: "Pedidos", value: stats.ordersCount.toString(), icon: "order_approve", color: "text-amber-400" },
+        { label: "Clientes", value: stats.usersCount.toString(), icon: "badge", color: "text-blue-400" },
+        { label: "Menu Items", value: stats.productsCount.toString(), icon: "restaurant", color: "text-red-400" },
+    ];
+
     return (
         <div className="flex-1 flex flex-col pt-32 pb-12">
             <div className="max-w-7xl mx-auto w-full px-4 md:px-10 lg:px-40">
@@ -39,8 +57,23 @@ export default function AdminDashboard() {
                     </p>
                 </div>
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                {/* Metrics Horizontal Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                    {metrics.map((metric) => (
+                        <div key={metric.label} className="p-6 rounded-2xl border border-surface-border bg-surface-dark/50 flex flex-col gap-3 group hover:border-white/10 transition-colors">
+                            <div className={`p-2 rounded-lg bg-surface-dark border border-white/5 w-fit ${metric.color}`}>
+                                <Icon name={metric.icon} size="sm" />
+                            </div>
+                            <div>
+                                <p className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">{metric.label}</p>
+                                <p className="text-2xl font-black text-white italic tracking-tighter">{metric.value}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Main Navigation Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     {ADMIN_LINKS.map((link) => (
                         <Link
                             key={link.href}

@@ -77,7 +77,7 @@ export function NavActions() {
                 <div className="hidden md:flex items-center gap-3">
                     {/* User avatar initials */}
                     <Link
-                        href={role === "admin" ? "/admin" : "/perfil"}
+                        href={role === "admin" ? "/admin" : "/profile"}
                         className="size-9 rounded-full bg-surface-dark border border-surface-border flex items-center justify-center text-sm font-bold text-primary hover:border-primary transition-colors cursor-pointer"
                         title={user.email ?? ""}
                     >

@@ -29,10 +29,10 @@ export function Icon({ name, className, size = "md", fill = "transparent" }: Ico
         restaurant: "Utensils",
         local_pizza: "Pizza",
         eco: "Leaf",
-        verified: "BadgeCheck",
+        verified: "Badge-check",
         fingerprint: "Fingerprint",
         favorite: "Heart",
-        location_on: "MapPin",
+        location_on: "Map-pin",
         call: "Phone",
         schedule: "Clock",
         timer: "Timer",
@@ -57,6 +57,12 @@ export function Icon({ name, className, size = "md", fill = "transparent" }: Ico
         inventory_2: "Package",
         group: "Users",
         refresh: "RefreshCw",
+        receipt_long: "ReceiptText",
+        local_shipping: "Truck",
+        payments: "BadgeDollarSign",
+        delivery_dining: "Bike",
+        order_approve: "Logs",
+        map_pin: "MapPin",
     };
 
     const lucideName = (iconMap[name] ||

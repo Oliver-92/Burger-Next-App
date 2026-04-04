@@ -4,6 +4,7 @@ import { useCartStore } from "@/lib/store/useCart";
 import { useHydrated } from "@/lib/hooks/useHydrated";
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import Image from "next/image";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import { useEffect } from "react";
@@ -151,10 +152,14 @@ export function CartSheet() {
                             </div>
                         </div>
 
-                        <button className="w-full h-14 bg-primary text-background-dark font-black text-lg rounded-xl flex items-center justify-center gap-2 hover:bg-primary-hover active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(54,226,123,0.3)] cursor-pointer">
+                        <Link 
+                            href="/checkout"
+                            onClick={() => setIsOpen(false)}
+                            className="w-full h-14 bg-primary text-background-dark font-black text-lg rounded-xl flex items-center justify-center gap-2 hover:bg-primary-hover active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(54,226,123,0.3)] cursor-pointer"
+                        >
                             Finalizar Compra
                             <Icon name="arrow_forward" size="md" />
-                        </button>
+                        </Link>
 
                         <p className="text-[10px] text-center text-text-secondary">
                             Impuestos y envío calculados en el siguiente paso.

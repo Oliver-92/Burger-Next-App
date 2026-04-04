@@ -11,6 +11,7 @@ import type { User } from "@supabase/supabase-js";
 export function MobileMenu() {
     const [user, setUser] = useState<User | null>(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [role, setRole] = useState<"admin" | "user" | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -19,6 +20,7 @@ export function MobileMenu() {
         supabase.auth.getUser().then(({ data }) => {
             setUser(data.user);
         });
+
 
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
             setUser(session?.user ?? null);
@@ -95,14 +97,14 @@ export function MobileMenu() {
                         Menú
                     </Link>
                     <Link
-                        href="/ubicaciones"
+                        href="/locations"
                         onClick={closeMenu}
                         className="text-4xl font-bold text-white hover:text-primary transition-all hover:scale-110 active:scale-95"
                     >
                         Ubicaciones
                     </Link>
                     <Link
-                        href="/nosotros"
+                        href="/about"
                         onClick={closeMenu}
                         className="text-4xl font-bold text-white hover:text-primary transition-all hover:scale-110 active:scale-95"
                     >
@@ -113,9 +115,11 @@ export function MobileMenu() {
                     {user ? (
                         <div className="flex flex-col items-center gap-6 mt-4">
                             <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-surface-dark border border-surface-border">
-                                <div className="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold">
+                                <Link href={role === "admin" ? "/admin" : "/profile"}
+                                    onClick={closeMenu}
+                                    className="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold">
                                     {user.email?.charAt(0).toUpperCase() ?? "U"}
-                                </div>
+                                </Link>
                                 <div className="flex flex-col">
                                     <span className="text-text-secondary text-xs">{user.email}</span>
                                 </div>

@@ -9,12 +9,12 @@ export const ABOUT_CONTENT: AboutContent = {
         "Nuestra filosofía es simple: ingredientes reales, procesos artesanales y una pasión innegable por lo que hacemos. No solo vendemos hamburguesas, creamos experiencias que conectan con tu estilo de vida.",
         "Hoy seguimos innovando, manteniendo nuestras raíces y el compromiso de ofrecerte siempre lo mejor de la ciudad en cada bocado."
     ],
-    storyImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuAQqgaEj0hkX95tw5Yk7FveDm5KDtQsYruD7M-t4KhmCBeVlKBb4QvXLjhGPsHOOzAcOXjfd0OI6fo1qEdYjqQstlyReGmMTnmdPloMSlGn7RGBmSZSE-xRb-pmdtBFdiK-m0o2zAO0lGP7bd8XzAUG1wmriHtxDEu8mtsToi_rYthvMjBg_AALSwUZXZeIeSchJupdHrBysyROuiZ2X48HNXPJxYM6kPQAJV9Va1g_I8p5HZquHl6CWTdbvrAH05JmMEsqHepAEea8",
+    storyImage: "https://res.cloudinary.com/dhrtwfd13/image/upload/v1775320795/about_ntoeq5.png",
     valuesTitle: "Nuestros Valores",
     values: [
         {
             id: "calidad",
-            icon: "BadgeCheck",
+            icon: "Badge-check",
             title: "Calidad Real",
             description: "Solo usamos carne 100% Angus y vegetales frescos de productores locales."
         },

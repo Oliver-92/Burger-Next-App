@@ -8,7 +8,7 @@ export async function getAboutContent(): Promise<AboutContent> {
 
   try {
     const res = await fetch(`${baseUrl}/api/about`, {
-      next: { revalidate: 3600 }, // ISR 1 hour
+      next: { revalidate: 0 },
     });
 
     if (!res.ok) {

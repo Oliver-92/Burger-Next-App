@@ -19,13 +19,13 @@ export function Navbar() {
                             Menú
                         </Link>
                         <Link
-                            href="/ubicaciones"
+                            href="/locations"
                             className="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold"
                         >
                             Ubicaciones
                         </Link>
                         <Link
-                            href="/nosotros"
+                            href="/about"
                             className="text-slate-600 dark:text-text-secondary hover:text-primary transition-colors text-sm font-semibold"
                         >
                             Nosotros

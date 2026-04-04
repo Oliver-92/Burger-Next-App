@@ -109,3 +109,39 @@ const MENU_CATEGORY = {
 
 export type MenuCategory = (typeof MENU_CATEGORY)[keyof typeof MENU_CATEGORY];
 export { MENU_CATEGORY };
+
+// ── Order System ─────────────────────────────────────────────────────────────
+export type OrderStatus = "pending" | "processing" | "paid" | "failed";
+
+export interface Order {
+    id: string;
+    user_id: string;
+    status: OrderStatus;
+    total: number;
+    created_at: string;
+    items?: OrderItem[];
+}
+
+export interface OrderItem {
+    id: string;
+    order_id: string;
+    product_name: string;
+    product_price: number;
+    quantity: number;
+    notes?: string;
+    extras?: OrderItemExtra[];
+    removables?: OrderItemRemovable[];
+}
+
+export interface OrderItemExtra {
+    id: string;
+    order_item_id: string;
+    extra_name: string;
+    extra_price: number;
+}
+
+export interface OrderItemRemovable {
+    id: string;
+    order_item_id: string;
+    removable_name: string;
+}
