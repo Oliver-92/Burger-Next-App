@@ -1,15 +1,33 @@
+import { createClient } from "@/lib/supabase/server";
+import { mapBadge } from "@/lib/utils";
 import type { Product } from "@/lib/types";
 
+/**
+ * Fetches the full menu directly from Supabase.
+ * This avoids internal fetch calls to localhost:3000 during build time.
+ */
 export async function getMenuItems(): Promise<Product[]> {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+    const supabase = await createClient();
 
-    const res = await fetch(`${baseUrl}/api/menu`, {
-        next: { revalidate: 0 },
-    });
+    const { data: products, error } = await supabase
+        .from("products")
+        .select(`
+            *,
+            categories (
+                slug
+            )
+        `);
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch menu items");
+    if (error) {
+        console.error("Error fetching menu items from Supabase:", error);
+        return [];
     }
 
-    return res.json() as Promise<Product[]>;
+    const mappedProducts = (products || []).map((p: any) => ({
+        ...p,
+        category: p.categories?.slug || "all",
+        badge: mapBadge(p.badge),
+    }));
+
+    return mappedProducts as Product[];
 }

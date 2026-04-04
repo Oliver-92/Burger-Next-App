@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MenuCard } from "@/components/molecules/MenuCard";
+import { ProductCard } from "@/components/molecules/ProductCard";
 import { FilterBar } from "@/components/organisms/FilterBar";
 import { FloatingCart } from "@/components/organisms/FloatingCart";
 import type { Product, MenuCategory } from "@/lib/types";
@@ -28,7 +28,7 @@ export function MenuGrid({ items }: MenuGridProps) {
             <div className="w-full px-4 md:px-10 py-8 max-w-[1280px] mx-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filtered.map((item) => (
-                        <MenuCard key={item.id} item={item} />
+                        <ProductCard key={item.id} product={item} />
                     ))}
                 </div>
             </div>

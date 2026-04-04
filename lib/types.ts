@@ -145,3 +145,15 @@ export interface OrderItemRemovable {
     order_item_id: string;
     removable_name: string;
 }
+
+// ── Payload Types ────────────────────────────────────────────────────────────
+export interface ProductSaveInput {
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+    category: MenuCategory;
+    featured?: boolean;
+    badge?: string; // Etiqueta como string plano para el formulario
+}
+

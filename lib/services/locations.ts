@@ -1,23 +1,11 @@
 import { Location } from "@/lib/types";
+import { LOCATIONS } from "@/lib/data/locations";
 
+/**
+ * Fetches the locations data directly from the static data file.
+ * This avoids internal fetch calls to localhost:3000 during build time.
+ */
 export async function getLocations(): Promise<Location[]> {
-  const isServer = typeof window === "undefined";
-  const baseUrl = isServer
-    ? process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
-    : "";
-
-  try {
-    const res = await fetch(`${baseUrl}/api/locations`, {
-      next: { revalidate: 0 }, // 0 Caching disabled for development
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch locations");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error("Error fetching locations:", error);
-    return [];
-  }
+  // Using direct import for better performance and to avoid build-time ECONNREFUSED
+  return LOCATIONS;
 }

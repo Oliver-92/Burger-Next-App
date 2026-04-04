@@ -27,11 +27,11 @@ export function Button({
             className={cn(
                 "transition-all font-bold cursor-pointer",
                 variant === "primary" &&
-                "h-14 px-8 rounded-full bg-primary text-background-dark hover:bg-primary/90 hover:scale-105 shadow-[0_4px_20px_rgba(54,226,123,0.4)] flex items-center gap-2",
+                "h-14 px-8 rounded-full bg-primary text-background-dark hover:bg-primary/90 hover:scale-105 shadow-[0_4px_20px_rgba(54,226,123,0.4)] flex items-center justify-center gap-2",
                 variant === "secondary" &&
                 "h-14 px-8 rounded-full border border-slate-300 dark:border-surface-border text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-surface-border",
                 variant === "ghost" &&
-                "h-10 px-4 rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:opacity-80 text-sm",
+                "h-10 px-4 flex items-center justify-center gap-2 rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:opacity-80 text-sm",
                 variant === "icon" &&
                 "size-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-gray-300 dark:hover:opacity-80",
                 variant === "light" &&

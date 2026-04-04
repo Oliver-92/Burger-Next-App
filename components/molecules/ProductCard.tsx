@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import type { Product } from "@/lib/types";
 import { useCartStore } from "@/lib/store/useCart";
@@ -9,9 +10,11 @@ import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
     product: Product;
+    className?: string;
+    isCarouselItem?: boolean;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, className, isCarouselItem = false }: ProductCardProps) {
     const addItem = useCartStore((state) => state.addItem);
     const [isAdded, setIsAdded] = useState(false);
     const formattedPrice = `$${product.price.toFixed(2)}`;
@@ -28,53 +31,60 @@ export function ProductCard({ product }: ProductCardProps) {
     };
 
     return (
-        <article className="min-w-[280px] md:min-w-[320px] snap-center rounded-2xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group shrink-0">
+        <article className={cn(
+            "group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_-10px_rgba(54,226,123,0.2)]",
+            isCarouselItem && "min-w-[200px] md:min-w-[320px] max-w-[280px] sm:max-w-[500px] max-h-[500px] snap-center shrink-0",
+            className
+        )}>
             {/* Image */}
-            <Link href={`/product/${product.id}`} className="block h-48 w-full bg-slate-100 dark:bg-black/20 relative overflow-hidden">
+            <Link href={`/product/${product.id}`} className="relative aspect-4/3 w-full overflow-hidden bg-slate-100 dark:bg-gray-800">
                 <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    sizes="(max-width: 768px) 280px, 320px"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
+
+                {/* Badge Overlay */}
                 {product.badge && (
-                    <div className="absolute top-3 right-3">
+                    <div className="absolute top-4 left-4 z-10 transition-transform group-hover:scale-110">
                         <Badge
                             label={product.badge.label}
-                            icon={product.badge.icon}
                             variant={product.badge.variant}
+                            icon={product.badge.variant === "vegan" ? "eco" : product.badge.variant === "spicy" ? "flame" : undefined}
                         />
                     </div>
                 )}
             </Link>
 
             {/* Content */}
-            <div className="p-5">
-                <div className="flex justify-between items-start mb-2">
+            <div className="flex flex-col flex-1 p-6">
+                <div className="flex justify-between items-start mb-2 group-hover:transform group-hover:translate-x-1 transition-transform">
                     <Link href={`/product/${product.id}`}>
-                        <h3 className="text-lg font-bold text-slate-900 dark:text-white hover:text-primary transition-colors">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
                             {product.name}
                         </h3>
                     </Link>
-                    <span className="text-primary font-bold">{formattedPrice}</span>
+                    <span className="text-lg font-black text-primary">{formattedPrice}</span>
                 </div>
-                <p className="text-sm text-slate-500 dark:text-text-secondary mb-4 line-clamp-2">
+
+                <p className="text-slate-500 dark:text-text-secondary text-sm leading-relaxed mb-6 line-clamp-2">
                     {product.description}
                 </p>
-                <button
-                    onClick={handleAdd}
-                    disabled={isAdded}
-                    className={cn(
-                        "w-full h-10 rounded-full text-sm font-bold flex items-center justify-center gap-2 cursor-pointer transition-all",
-                        isAdded
-                            ? "bg-primary text-background-dark"
-                            : "bg-slate-100 dark:bg-surface-border text-slate-900 dark:text-white hover:bg-primary hover:text-background-dark"
-                    )}
-                >
-                    <Icon name={isAdded ? "check" : "add"} size="sm" />
-                    {isAdded ? "Añadido" : "Agregar al pedido"}
-                </button>
+
+                {/* Actions */}
+                <div className="mt-auto pt-4 flex gap-3">
+                    <Button
+                        variant={isAdded ? "primary" : "ghost"}
+                        className="flex-1 transition-all"
+                        onClick={handleAdd}
+                        disabled={isAdded}
+                    >
+                        <Icon name={isAdded ? "check" : "shopping_cart"} size="sm" />
+                        {isAdded ? "¡Añadido!" : "Agregar al carrito"}
+                    </Button>
+                </div>
             </div>
         </article>
     );

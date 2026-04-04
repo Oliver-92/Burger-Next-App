@@ -125,7 +125,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                             </h1>
                             <div className="flex flex-col items-end">
                                 <span className="text-white text-3xl font-bold tracking-tight">
-                                    ${product.price.toFixed(2)}
+                                    ${Number(product.price).toFixed(2)}
                                 </span>
                                 <div className="flex items-center gap-1 text-text-secondary text-xs font-medium">
                                     <Icon name="timer" size="sm" className="text-[16px]" /> 15 min

@@ -72,10 +72,11 @@ export function HeroSection() {
 
                         {/* Burger Image */}
                         <Image
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJFhNiPI-xilHvyT-WN6fY5YEO3d4MzsW_sIga39uvS3T09Ix4dw8Yk4X8fScTZg7bVWy9HjSqK5oXcg_ul5vtQGu-K_HFyNRl59lpQHAzwHusDBtLug8b8vghsmW1a4sLR3_6pK5UI_-yXoXpaA8IUdjTv4sEtlsPpqDV7TpqVPnd8hEwKG9-E3eZcwTPrJxhr7bSPBATaTc6cEhxztO4tvVm1qaurfBtbM53VR3T4jcdkGlO5IcS6OZglx3nEHldny4T4So7RCIX"
+                            src="https://res.cloudinary.com/dhrtwfd13/image/upload/v1775332800/banner_vqqjzu.webp"
                             alt="Hamburguesa con queso derretido, lechuga fresca y doble carne"
                             width={500}
                             height={500}
+                            loading="eager"
                             className="w-full max-w-[500px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform transition-transform duration-500 hover:scale-105 hover:rotate-2"
                             priority
                         />

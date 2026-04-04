@@ -21,13 +21,13 @@ export function Footer() {
 
                     {/* Navigation Links */}
                     <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
-                        <Link href="/nosotros" className="text-gray-400 hover:text-primary transition-colors text-sm font-medium">
+                        <Link href="/about" className="text-gray-400 hover:text-primary transition-colors text-sm font-medium">
                             Nosotros
                         </Link>
                         <Link href="/menu" className="text-gray-400 hover:text-primary transition-colors text-sm font-medium">
                             Menú
                         </Link>
-                        <Link href="/ubicaciones" className="text-gray-400 hover:text-primary transition-colors text-sm font-medium">
+                        <Link href="/locations" className="text-gray-400 hover:text-primary transition-colors text-sm font-medium">
                             Ubicaciones
                         </Link>
                     </div>
