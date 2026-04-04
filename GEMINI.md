@@ -149,8 +149,3 @@ lib/services/products.ts  →  app/actions/products.ts  →  Componente (Server/
 - .agents/skills/tailwind-4/SKILL.md
 - .agents/skills/react-19/SKILL.md
 - .agents/skills/auth/SKILL.md
-
-## Imágenes Permitidas
-
-Configuradas en `next.config.ts`:
-- `lh3.googleusercontent.com/aida-public/**` (imágenes del diseño)
