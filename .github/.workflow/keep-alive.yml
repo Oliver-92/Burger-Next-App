@@ -1,0 +1,17 @@
+name: Keep Supabase Awake
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -X GET \
+          "https://TU_PROJECT.supabase.co/rest/v1/keep_alive?select=id&limit=1" \
+          -H "apikey: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}"
