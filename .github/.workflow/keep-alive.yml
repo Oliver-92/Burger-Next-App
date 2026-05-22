@@ -13,5 +13,5 @@ jobs:
       - name: Ping Supabase
         run: |
           curl -X GET \
-          "https://TU_PROJECT.supabase.co/rest/v1/keep_alive?select=id&limit=1" \
+          "https://wauqlbyaoezxbbrlteen.supabase.co/rest/v1/keep_alive?select=id&limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}"
